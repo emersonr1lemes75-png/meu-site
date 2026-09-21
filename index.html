@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meu Site</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #050b14;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #123456;
+      background: #07111f;
+    }
+
+    header h1 {
+      color: #29a9ff;
+      font-size: 28px;
+    }
+
+    header p {
+      margin-top: 8px;
+      color: #aab7c4;
+    }
+
+    .hero {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .hero h2 span {
+      color: #29a9ff;
+    }
+
+    .hero p {
+      color: #b8c4d0;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .botao {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 28px;
+      background: #168cff;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .botao:active {
+      transform: scale(0.97);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background: #0b1726;
+      border: 1px solid #163553;
+      border-radius: 15px;
+      padding: 25px;
+    }
+
+    .card h3 {
+      color: #29a9ff;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #aebbc8;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 30px;
+      color: #718090;
+      border-top: 1px solid #123456;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>MEU SITE</h1>
+    <p>Meu primeiro projeto na internet</p>
+  </header>
+
+  <section class="hero">
+    <h2>Bem-vindo ao <span>meu projeto</span></h2>
+
+    <p>
+      Este é o primeiro modelo do meu site.
+      Vamos construir, testar e melhorar cada parte até chegar ao resultado que eu quero.
+    </p>
+
+    <a href="#recursos" class="botao">Começar</a>
+  </section>
+
+  <section class="cards" id="recursos">
+
+    <div class="card">
+      <h3>🚀 Projeto</h3>
+      <p>
+        Uma área para apresentar o projeto e suas principais ideias.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>💡 Ideias</h3>
+      <p>
+        Podemos
