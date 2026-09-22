@@ -142,26 +142,64 @@
       padding: 25px 16px 90px;
     }
 
-    .tela {
-      display: none;
-    }
+  function abrirTela(id, botao) {
 
-    .tela.ativa {
-      display: block;
-      animation: aparecer 0.2s ease;
-    }
+  document.querySelectorAll(".tela").forEach(function(tela) {
+    tela.classList.remove("ativa");
+  });
 
-    @keyframes aparecer {
-      from {
-        opacity: 0;
-        transform: translateY(5px);
-      }
+  const telaSelecionada = document.getElementById(id);
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+  if (telaSelecionada) {
+    telaSelecionada.classList.add("ativa");
+  }
+
+  document.querySelectorAll("nav button").forEach(function(btn) {
+    btn.classList.remove("ativo");
+  });
+
+  if (botao) {
+    botao.classList.add("ativo");
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+
+function abrirPorNome(id) {
+
+  const tela = document.getElementById(id);
+
+  if (!tela) {
+    return;
+  }
+
+  document.querySelectorAll(".tela").forEach(function(item) {
+    item.classList.remove("ativa");
+  });
+
+  tela.classList.add("ativa");
+
+  document.querySelectorAll("nav button").forEach(function(btn) {
+    btn.classList.remove("ativo");
+  });
+
+  const botao = document.querySelector(
+    'nav button[onclick*="' + id + '"]'
+  );
+
+  if (botao) {
+    botao.classList.add("ativo");
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
 
     /* =========================
        INÍCIO
