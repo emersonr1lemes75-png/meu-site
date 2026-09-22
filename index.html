@@ -16,232 +16,2252 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    :root {
+      --fundo: #05070b;
+      --fundo2: #080d14;
+      --cartao: #0d141d;
+      --borda: #1b2a38;
+      --azul: #00aaff;
+      --azul2: #0077b6;
+      --texto: #ffffff;
+      --texto2: #9eacbb;
+      --verde: #20d47b;
+      --vermelho: #ff4d5e;
     }
 
     body {
-      background: #05070b;
-      color: #ffffff;
+      background: var(--fundo);
+      color: var(--texto);
       min-height: 100vh;
+      overflow-x: hidden;
     }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* =========================
+       TOPO
+    ========================= */
 
     header {
-      padding: 20px;
-      text-align: center;
-      border-bottom: 1px solid #17202b;
-      background: #080b10;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(5, 7, 11, 0.96);
+      border-bottom: 1px solid var(--borda);
+      padding: 14px 16px;
+      backdrop-filter: blur(10px);
     }
 
-    header h1 {
-      font-size: 32px;
-      letter-spacing: 3px;
-      color: #00aaff;
+    .topo {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
     }
 
-    header p {
-      margin-top: 6px;
-      color: #8d9aaa;
-      font-size: 14px;
+    .logo {
+      color: var(--azul);
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 4px;
     }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--texto2);
+      font-size: 12px;
+    }
+
+    .ponto {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--verde);
+      box-shadow: 0 0 10px var(--verde);
+    }
+
+    /* =========================
+       MENU
+    ========================= */
+
+    nav {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      gap: 7px;
+      overflow-x: auto;
+      padding-top: 12px;
+      scrollbar-width: none;
+    }
+
+    nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    nav button {
+      flex: 0 0 auto;
+      background: #0b1118;
+      border: 1px solid var(--borda);
+      color: var(--texto2);
+      border-radius: 10px;
+      padding: 9px 13px;
+      font-size: 13px;
+    }
+
+    nav button:hover,
+    nav button.ativo {
+      color: white;
+      border-color: var(--azul);
+      background: #0b1a26;
+    }
+
+    /* =========================
+       PRINCIPAL
+    ========================= */
 
     main {
-      max-width: 900px;
+      width: 100%;
+      max-width: 1100px;
       margin: auto;
-      padding: 25px 18px 40px;
+      padding: 25px 16px 90px;
     }
 
-    .boas-vindas {
+    .tela {
+      display: none;
+    }
+
+    .tela.ativa {
+      display: block;
+      animation: aparecer 0.2s ease;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       INÍCIO
+    ========================= */
+
+    .hero {
       text-align: center;
-      margin: 20px 0 30px;
+      padding: 20px 5px 30px;
     }
 
-    .boas-vindas h2 {
+    .hero h1 {
+      font-size: clamp(30px, 8vw, 54px);
+      letter-spacing: 5px;
+      color: var(--azul);
+      text-shadow: 0 0 25px rgba(0, 170, 255, 0.25);
+    }
+
+    .hero h2 {
+      margin-top: 8px;
+      font-size: 22px;
+    }
+
+    .hero p {
+      color: var(--texto2);
+      margin-top: 9px;
+      line-height: 1.5;
+    }
+
+    .horario {
+      margin: 20px auto;
+      max-width: 500px;
+      background: linear-gradient(145deg, #0c141d, #080d13);
+      border: 1px solid var(--borda);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .hora {
+      font-size: 42px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .data {
+      margin-top: 5px;
+      color: var(--texto2);
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .grade {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--cartao);
+      border: 1px solid var(--borda);
+      border-radius: 17px;
+      padding: 19px;
+    }
+
+    .card h3 {
+      color: var(--azul);
+      margin-bottom: 9px;
+      font-size: 18px;
+    }
+
+    .card p {
+      color: var(--texto2);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .icone {
       font-size: 28px;
       margin-bottom: 10px;
     }
 
-    .boas-vindas p {
-      color: #aeb8c4;
-      line-height: 1.6;
+    /* =========================
+       BOTÕES
+    ========================= */
+
+    .btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 15px;
+      background: var(--azul2);
+      color: white;
+      font-weight: bold;
+      margin-top: 13px;
     }
 
-    .painel {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
+    .btn:hover {
+      background: var(--azul);
     }
 
-    .card {
-      background: #0b1017;
-      border: 1px solid #172532;
-      border-radius: 16px;
-      padding: 22px;
-      transition: 0.2s;
+    .btn.secundario {
+      background: #121b25;
+      border: 1px solid var(--borda);
     }
 
-    .card:hover {
-      border-color: #00aaff;
-      transform: translateY(-3px);
+    .btn.perigo {
+      background: #47141c;
+      border: 1px solid #72232e;
     }
 
-    .card h3 {
-      color: #00aaff;
-      margin-bottom: 10px;
-      font-size: 19px;
+    /* =========================
+       TÍTULOS
+    ========================= */
+
+    .titulo {
+      margin-bottom: 18px;
     }
 
-    .card p {
-      color: #aeb8c4;
-      font-size: 14px;
-      line-height: 1.5;
+    .titulo h2 {
+      font-size: 27px;
+    }
+
+    .titulo p {
+      color: var(--texto2);
+      margin-top: 5px;
+    }
+
+    /* =========================
+       FORMULÁRIOS
+    ========================= */
+
+    .campo {
+      margin-bottom: 13px;
+    }
+
+    .campo label {
+      display: block;
+      color: var(--texto2);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      background: #080d13;
+      border: 1px solid var(--borda);
+      color: white;
+      border-radius: 10px;
+      padding: 12px;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--azul);
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    /* =========================
+       TAREFAS
+    ========================= */
+
+    .tarefa {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: #080d13;
+      border: 1px solid var(--borda);
+      padding: 12px;
+      border-radius: 11px;
+      margin-bottom: 8px;
+    }
+
+    .tarefa.concluida span {
+      text-decoration: line-through;
+      color: #687585;
+    }
+
+    .tarefa button {
+      border: 0;
+      background: transparent;
+      color: var(--vermelho);
+      font-size: 18px;
+    }
+
+    /* =========================
+       FINANÇAS
+    ========================= */
+
+    .saldo {
+      text-align: center;
+      background: linear-gradient(145deg, #07131d, #0c1721);
+      border: 1px solid var(--borda);
+      border-radius: 18px;
+      padding: 25px;
       margin-bottom: 15px;
     }
 
-    button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: #008ed6;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
+    .saldo small {
+      color: var(--texto2);
     }
 
-    button:hover {
-      background: #00aaff;
+    .saldo strong {
+      display: block;
+      font-size: 35px;
+      margin-top: 8px;
     }
 
-    #resposta {
-      margin-top: 25px;
-      padding: 18px;
-      border-radius: 14px;
+    .entrada {
+      color: var(--verde);
+    }
+
+    .saida {
+      color: var(--vermelho);
+    }
+
+    /* =========================
+       ASSISTENTE
+    ========================= */
+
+    .assistente {
+      max-width: 750px;
+      margin: auto;
+    }
+
+    .chat {
+      height: 400px;
+      overflow-y: auto;
+      background: #070b10;
+      border: 1px solid var(--borda);
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 12px;
+    }
+
+    .mensagem {
+      max-width: 85%;
+      padding: 11px 13px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      line-height: 1.4;
+      font-size: 14px;
+    }
+
+    .nexus {
+      background: #0c1d2a;
+      border: 1px solid #12384d;
+    }
+
+    .usuario {
+      background: #18202a;
+      margin-left: auto;
+    }
+
+    .entrada-chat {
+      display: flex;
+      gap: 8px;
+    }
+
+    .entrada-chat input {
+      flex: 1;
+    }
+
+    .microfone {
+      width: 52px;
+      background: #123247;
+    }
+
+    /* =========================
+       CALCULADORA
+    ========================= */
+
+    .calculadora {
+      max-width: 400px;
+      margin: auto;
       background: #080d13;
-      border: 1px solid #172532;
-      color: #dbe7f2;
-      text-align: center;
-      min-height: 55px;
+      border: 1px solid var(--borda);
+      padding: 15px;
+      border-radius: 17px;
     }
+
+    #visor {
+      font-size: 27px;
+      text-align: right;
+      margin-bottom: 10px;
+      height: 58px;
+    }
+
+    .botoes-calc {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .botoes-calc button {
+      height: 55px;
+      border: 1px solid var(--borda);
+      background: #101821;
+      color: white;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+
+    .botoes-calc button:hover {
+      border-color: var(--azul);
+    }
+
+    /* =========================
+       RODAPÉ
+    ========================= */
 
     footer {
       text-align: center;
       padding: 25px 15px;
-      border-top: 1px solid #17202b;
-      color: #687585;
-      font-size: 13px;
+      border-top: 1px solid var(--borda);
+      color: #647282;
+      font-size: 12px;
+    }
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      main {
+        padding-top: 18px;
+      }
+
+      .hora {
+        font-size: 35px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .grade {
+        grid-template-columns: 1fr;
+      }
+
+      .entrada-chat {
+        flex-wrap: wrap;
+      }
+
+      .entrada-chat input {
+        width: 100%;
+      }
+
+      .microfone {
+        width: 52px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- =========================
+       CABEÇALHO
+  ========================== -->
+
   <header>
-    <h1>NEXUS</h1>
-    <p>Seu assistente. Sua rotina. Seu controle.</p>
+
+    <div class="topo">
+
+      <div class="logo">
+        NEXUS
+      </div>
+
+      <div class="status">
+        <span class="ponto"></span>
+        Sistema ativo
+      </div>
+
+    </div>
+
+    <nav>
+
+      <button class="ativo" onclick="abrirTela('inicio', this)">
+        🏠 Início
+      </button>
+
+      <button onclick="abrirTela('rotina', this)">
+        ⏰ Rotina
+      </button>
+
+      <button onclick="abrirTela('tarefas', this)">
+        ✅ Tarefas
+      </button>
+
+      <button onclick="abrirTela('financas', this)">
+        💰 Finanças
+      </button>
+
+      <button onclick="abrirTela('estudos', this)">
+        📚 Estudos
+      </button>
+
+      <button onclick="abrirTela('notas', this)">
+        📝 Notas
+      </button>
+
+      <button onclick="abrirTela('assistente', this)">
+        🤖 Assistente
+      </button>
+
+      <button onclick="abrirTela('calculadora', this)">
+        🧮 Calculadora
+      </button>
+
+      <button onclick="abrirTela('config', this)">
+        ⚙️ Configurações
+      </button>
+
+    </nav>
+
   </header>
+
 
   <main>
 
-    <section class="boas-vindas">
-      <h2>Olá! Eu sou o Nexus.</h2>
-      <p>
-        Um projeto de assistente pessoal para ajudar você
-        a organizar sua rotina, estudos, finanças e tarefas.
-      </p>
+    <!-- =========================
+         INÍCIO
+    ========================== -->
+
+    <section id="inicio" class="tela ativa">
+
+      <div class="hero">
+
+        <h1>NEXUS 1.0</h1>
+
+        <h2>Seu assistente. Sua rotina. Seu controle.</h2>
+
+        <p>
+          Uma central pessoal para organizar sua vida,
+          seus estudos, suas tarefas e seus objetivos.
+        </p>
+
+        <div class="horario">
+
+          <div id="hora" class="hora">
+            00:00:00
+          </div>
+
+          <div id="data" class="data">
+            Carregando data...
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="grade">
+
+        <div class="card">
+
+          <div class="icone">⏰</div>
+
+          <h3>Minha rotina</h3>
+
+          <p>
+            Organize o seu dia e acompanhe seus horários.
+          </p>
+
+          <button
+            class="btn"
+            onclick="abrirPorNome('rotina')"
+          >
+            Abrir rotina
+          </button>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="icone">💰</div>
+
+          <h3>Minhas finanças</h3>
+
+          <p>
+            Registre entradas e gastos para acompanhar
+            seu dinheiro.
+          </p>
+
+          <button
+            class="btn"
+            onclick="abrirPorNome('financas')"
+          >
+            Abrir finanças
+          </button>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="icone">📚</div>
+
+          <h3>Meus estudos</h3>
+
+          <p>
+            Organize seus módulos e acompanhe seu aprendizado.
+          </p>
+
+          <button
+            class="btn"
+            onclick="abrirPorNome('estudos')"
+          >
+            Abrir estudos
+          </button>
+
+        </div>
+
+
+        <div class="card">
+
+          <div class="icone">🤖</div>
+
+          <h3>Falar com Nexus</h3>
+
+          <p>
+            Converse com o assistente e teste o comando de voz.
+          </p>
+
+          <button
+            class="btn"
+            onclick="abrirPorNome('assistente')"
+          >
+            Iniciar
+          </button>
+
+        </div>
+
+      </div>
+
     </section>
 
-    <section class="painel">
 
-      <div class="card">
-        <h3>⏰ Rotina</h3>
+    <!-- =========================
+         ROTINA
+    ========================== -->
+
+    <section id="rotina" class="tela">
+
+      <div class="titulo">
+
+        <h2>⏰ Minha rotina</h2>
+
         <p>
-          Organize seus horários, tarefas e compromissos.
+          Organize seu dia.
         </p>
-        <button onclick="mostrar('Área de rotina selecionada.')">
-          Abrir rotina
-        </button>
+
       </div>
 
-      <div class="card">
-        <h3>📚 Estudos</h3>
-        <p>
-          Organize seus estudos e acompanhe seu aprendizado.
-        </p>
-        <button onclick="mostrar('Área de estudos selecionada.')">
-          Abrir estudos
-        </button>
-      </div>
 
-      <div class="card">
-        <h3>💰 Finanças</h3>
-        <p>
-          Controle seus gastos, economias e objetivos financeiros.
-        </p>
-        <button onclick="mostrar('Área financeira selecionada.')">
-          Abrir finanças
-        </button>
-      </div>
+      <div class="grade">
 
-      <div class="card">
-        <h3>📝 Anotações</h3>
-        <p>
-          Guarde ideias, lembretes e informações importantes.
-        </p>
-        <button onclick="mostrar('Área de anotações selecionada.')">
-          Abrir anotações
-        </button>
-      </div>
+        <div class="card">
 
-      <div class="card">
-        <h3>🤖 Assistente</h3>
-        <p>
-          O Nexus poderá receber comandos e ajudar nas suas tarefas.
-        </p>
-        <button onclick="falarNexus()">
-          Falar com Nexus
-        </button>
-      </div>
+          <h3>🌅 Manhã</h3>
 
-      <div class="card">
-        <h3>⚙️ Configurações</h3>
-        <p>
-          Personalize as funções do seu assistente.
-        </p>
-        <button onclick="mostrar('Configurações selecionadas.')">
-          Configurações
-        </button>
+          <p>
+            05:00 — Acordar<br>
+            05:10 — Água<br>
+            05:20 — Higiene<br>
+            05:30 — Aquecimento<br>
+            05:40 — Exercícios<br>
+            06:00 — Café da manhã
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>☀️ Tarde</h3>
+
+          <p>
+            Estudos, trabalho, tarefas,
+            alimentação e organização.
+          </p>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>🌙 Noite</h3>
+
+          <p>
+            Revisar o dia, organizar o próximo,
+            estudar e descansar.
+          </p>
+
+        </div>
+
       </div>
 
     </section>
 
-    <div id="resposta">
-      O Nexus está pronto.
-    </div>
+
+    <!-- =========================
+         TAREFAS
+    ========================== -->
+
+    <section id="tarefas" class="tela">
+
+      <div class="titulo">
+
+        <h2>✅ Tarefas</h2>
+
+        <p>
+          Adicione e acompanhe suas tarefas.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="campo">
+
+          <label>
+            Nova tarefa
+          </label>
+
+          <input
+            id="novaTarefa"
+            type="text"
+            placeholder="Ex.: Estudar programação"
+          >
+
+        </div>
+
+        <button
+          class="btn"
+          onclick="adicionarTarefa()"
+        >
+          Adicionar tarefa
+        </button>
+
+      </div>
+
+
+      <div
+        id="listaTarefas"
+        style="margin-top:15px;"
+      ></div>
+
+    </section>
+
+
+    <!-- =========================
+         FINANÇAS
+    ========================== -->
+
+    <section id="financas" class="tela">
+
+      <div class="titulo">
+
+        <h2>💰 Finanças</h2>
+
+        <p>
+          Controle simples do seu dinheiro.
+        </p>
+
+      </div>
+
+
+      <div class="saldo">
+
+        <small>
+          Saldo atual
+        </small>
+
+        <strong id="saldoAtual">
+          R$ 0,00
+        </strong>
+
+      </div>
+
+
+      <div class="grade">
+
+        <div class="card">
+
+          <h3>Adicionar movimentação</h3>
+
+          <div class="campo">
+
+            <label>
+              Descrição
+            </label>
+
+            <input
+              id="descricaoFinanceira"
+              type="text"
+              placeholder="Ex.: Salário"
+            >
+
+          </div>
+
+
+          <div class="campo">
+
+            <label>
+              Valor
+            </label>
+
+            <input
+              id="valorFinanceiro"
+              type="number"
+              step="0.01"
+              placeholder="0,00"
+            >
+
+          </div>
+
+
+          <div class="campo">
+
+            <label>
+              Tipo
+            </label>
+
+            <select id="tipoFinanceiro">
+
+              <option value="entrada">
+                Entrada
+              </option>
+
+              <option value="saida">
+                Saída
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <button
+            class="btn"
+            onclick="adicionarMovimentacao()"
+          >
+            Registrar
+          </button>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>Resumo</h3>
+
+          <p>
+            Entradas:
+            <strong
+              id="totalEntradas"
+              class="entrada"
+            >
+              R$ 0,00
+            </strong>
+          </p>
+
+          <br>
+
+          <p>
+            Saídas:
+            <strong
+              id="totalSaidas"
+              class="saida"
+            >
+              R$ 0,00
+            </strong>
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div
+        id="listaFinanceira"
+        style="margin-top:15px;"
+      ></div>
+
+    </section>
+
+
+    <!-- =========================
+         ESTUDOS
+    ========================== -->
+
+    <section id="estudos" class="tela">
+
+      <div class="titulo">
+
+        <h2>📚 Estudos</h2>
+
+        <p>
+          Seu centro de aprendizado.
+        </p>
+
+      </div>
+
+
+      <div class="grade">
+
+        <div class="card">
+
+          <h3>💻 Informática</h3>
+
+          <p>
+            Básica → Intermediária → Avançada
+          </p>
+
+          <button
+            class="btn"
+            onclick="mostrarAviso('Módulo de Informática selecionado.')"
+          >
+            Estudar
+          </button>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>👨‍💻 Programação</h3>
+
+          <p>
+            HTML, CSS, JavaScript e desenvolvimento
+            de aplicações.
+          </p>
+
+          <button
+            class="btn"
+            onclick="mostrarAviso('Módulo de Programação selecionado.')"
+          >
+            Estudar
+          </button>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>🔧 Mecânica</h3>
+
+          <p>
+            Automóveis, motocicletas e manutenção.
+          </p>
+
+          <button
+            class="btn"
+            onclick="mostrarAviso('Módulo de Mecânica selecionado.')"
+          >
+            Estudar
+          </button>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>⚡ Eletricista</h3>
+
+          <p>
+            Conceitos básicos de eletricidade
+            e instalações.
+          </p>
+
+          <button
+            class="btn"
+            onclick="mostrarAviso('Módulo de Eletricista selecionado.')"
+          >
+            Estudar
+          </button>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>📊 Administração</h3>
+
+          <p>
+            Organização, planejamento e gestão.
+          </p>
+
+          <button
+            class="btn"
+            onclick="mostrarAviso('Módulo de Administração selecionado.')"
+          >
+            Estudar
+          </button>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>💵 Educação financeira</h3>
+
+          <p>
+            Organização financeira, economia,
+            reserva e planejamento.
+          </p>
+
+          <button
+            class="btn"
+            onclick="mostrarAviso('Módulo de Educação Financeira selecionado.')"
+          >
+            Estudar
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         NOTAS
+    ========================== -->
+
+    <section id="notas" class="tela">
+
+      <div class="titulo">
+
+        <h2>📝 Minhas notas</h2>
+
+        <p>
+          Escreva e salve suas anotações neste aparelho.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <textarea
+          id="areaNotas"
+          placeholder="Digite suas anotações aqui..."
+        ></textarea>
+
+        <button
+          class="btn"
+          onclick="salvarNotas()"
+        >
+          Salvar notas
+        </button>
+
+        <button
+          class="btn secundario"
+          onclick="limparNotas()"
+        >
+          Limpar
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         ASSISTENTE
+    ========================== -->
+
+    <section id="assistente" class="tela">
+
+      <div class="titulo">
+
+        <h2>🤖 Nexus</h2>
+
+        <p>
+          Seu assistente pessoal.
+        </p>
+
+      </div>
+
+
+      <div class="assistente">
+
+        <div
+          id="chat"
+          class="chat"
+        >
+
+          <div class="mensagem nexus">
+            Olá! Eu sou o Nexus. Como posso ajudar?
+          </div>
+
+        </div>
+
+
+        <div class="entrada-chat">
+
+          <input
+            id="mensagemUsuario"
+            type="text"
+            placeholder="Digite um comando..."
+            onkeydown="teclaEnter(event)"
+          >
+
+          <button
+            class="btn"
+            onclick="enviarMensagem()"
+          >
+            Enviar
+          </button>
+
+          <button
+            class="btn microfone"
+            onclick="iniciarVoz()"
+            title="Comando de voz"
+          >
+            🎙️
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CALCULADORA
+    ========================== -->
+
+    <section id="calculadora" class="tela">
+
+      <div class="titulo">
+
+        <h2>🧮 Calculadora</h2>
+
+        <p>
+          Calculadora simples do Nexus.
+        </p>
+
+      </div>
+
+
+      <div class="calculadora">
+
+        <input
+          id="visor"
+          type="text"
+          readonly
+          value=""
+        >
+
+
+        <div class="botoes-calc">
+
+          <button onclick="calcLimpar()">C</button>
+          <button onclick="calcApagar()">⌫</button>
+          <button onclick="calcAdicionar('%')">%</button>
+          <button onclick="calcAdicionar('/')">÷</button>
+
+          <button onclick="calcAdicionar('7')">7</button>
+          <button onclick="calcAdicionar('8')">8</button>
+          <button onclick="calcAdicionar('9')">9</button>
+          <button onclick="calcAdicionar('*')">×</button>
+
+          <button onclick="calcAdicionar('4')">4</button>
+          <button onclick="calcAdicionar('5')">5</button>
+          <button onclick="calcAdicionar('6')">6</button>
+          <button onclick="calcAdicionar('-')">−</button>
+
+          <button onclick="calcAdicionar('1')">1</button>
+          <button onclick="calcAdicionar('2')">2</button>
+          <button onclick="calcAdicionar('3')">3</button>
+          <button onclick="calcAdicionar('+')">+</button>
+
+          <button onclick="calcAdicionar('0')">0</button>
+          <button onclick="calcAdicionar('.')">.</button>
+          <button onclick="calcResultado()">=</button>
+          <button onclick="calcLimpar()">AC</button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         CONFIGURAÇÕES
+    ========================== -->
+
+    <section id="config" class="tela">
+
+      <div class="titulo">
+
+        <h2>⚙️ Configurações</h2>
+
+        <p>
+          Personalize o Nexus.
+        </p>
+
+      </div>
+
+
+      <div class="grade">
+
+        <div class="card">
+
+          <h3>🔊 Voz</h3>
+
+          <p>
+            Teste a voz do Nexus.
+          </p>
+
+          <button
+            class="btn"
+            onclick="falar('Olá. Eu sou o Nexus. Sistema funcionando.')"
+          >
+            Testar voz
+          </button>
+
+        </div>
+
+
+        <div class="card">
+
+          <h3>🗑️ Dados locais</h3>
+
+          <p>
+            Apaga tarefas, notas e registros financeiros
+            salvos neste aparelho.
+          </p>
+
+          <button
+            class="btn perigo"
+            onclick="apagarDados()"
+          >
+            Apagar dados
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
 
   </main>
 
+
   <footer>
-    NEXUS 1.0 — Projeto pessoal
+
+    NEXUS 1.0<br>
+    Seu assistente. Sua rotina. Seu controle.
+
   </footer>
 
+
   <script>
-    function mostrar(texto) {
-      document.getElementById("resposta").textContent = texto;
+
+    /* =========================
+       NAVEGAÇÃO
+    ========================== */
+
+    function abrirTela(id, botao) {
+
+      document
+        .querySelectorAll(".tela")
+        .forEach(tela => {
+          tela.classList.remove("ativa");
+        });
+
+      const tela = document.getElementById(id);
+
+      if (tela) {
+        tela.classList.add("ativa");
+      }
+
+      document
+        .querySelectorAll("nav button")
+        .forEach(btn => {
+          btn.classList.remove("ativo");
+        });
+
+      if (botao) {
+        botao.classList.add("ativo");
+      }
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
     }
 
-    function falarNexus() {
-      mostrar("Olá! Sou o Nexus. Em breve teremos comandos de voz.");
 
-      if ("speechSynthesis" in window) {
-        const fala = new SpeechSynthesisUtterance(
-          "Olá! Sou o Nexus. Em breve teremos comandos de voz."
+    function abrirPorNome(id) {
+
+      const botoes = document.querySelectorAll("nav button");
+
+      for (const botao of botoes) {
+
+        if (
+          botao.getAttribute("onclick") &&
+          botao.getAttribute("onclick").includes("'" + id + "'")
+        ) {
+          abrirTela(id, botao);
+          return;
+        }
+
+      }
+
+      abrirTela(id, null);
+    }
+
+
+    /* =========================
+       RELÓGIO
+    ========================== */
+
+    function atualizarRelogio() {
+
+      const agora = new Date();
+
+      const horas =
+        String(agora.getHours()).padStart(2, "0");
+
+      const minutos =
+        String(agora.getMinutes()).padStart(2, "0");
+
+      const segundos =
+        String(agora.getSeconds()).padStart(2, "0");
+
+      document.getElementById("hora").textContent =
+        `${horas}:${minutos}:${segundos}`;
+
+
+      const data =
+        agora.toLocaleDateString(
+          "pt-BR",
+          {
+            weekday: "long",
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+          }
         );
 
-        fala.lang = "pt-BR";
-        window.speechSynthesis.speak(fala);
-      }
+      document.getElementById("data").textContent =
+        data.charAt(0).toUpperCase() + data.slice(1);
     }
+
+    setInterval(atualizarRelogio, 1000);
+
+    atualizarRelogio();
+
+
+    /* =========================
+       AVISOS
+    ========================== */
+
+    function mostrarAviso(texto) {
+
+      alert(texto);
+
+    }
+
+
+    /* =========================
+       TAREFAS
+    ========================== */
+
+    let tarefas =
+      JSON.parse(
+        localStorage.getItem("nexus_tarefas") || "[]"
+      );
+
+
+    function salvarTarefas() {
+
+      localStorage.setItem(
+        "nexus_tarefas",
+        JSON.stringify(tarefas)
+      );
+
+    }
+
+
+    function adicionarTarefa() {
+
+      const campo =
+        document.getElementById("novaTarefa");
+
+      const texto =
+        campo.value.trim();
+
+      if (!texto) {
+
+        alert("Digite uma tarefa.");
+
+        return;
+      }
+
+      tarefas.push({
+        texto: texto,
+        concluida: false
+      });
+
+      campo.value = "";
+
+      salvarTarefas();
+
+      mostrarTarefas();
+
+    }
+
+
+    function concluirTarefa(index) {
+
+      tarefas[index].concluida =
+        !tarefas[index].concluida;
+
+      salvarTarefas();
+
+      mostrarTarefas();
+
+    }
+
+
+    function removerTarefa(index) {
+
+      tarefas.splice(index, 1);
+
+      salvarTarefas();
+
+      mostrarTarefas();
+
+    }
+
+
+    function mostrarTarefas() {
+
+      const lista =
+        document.getElementById("listaTarefas");
+
+      lista.innerHTML = "";
+
+      tarefas.forEach((tarefa, index) => {
+
+        const div =
+          document.createElement("div");
+
+        div.className =
+          "tarefa" +
+          (tarefa.concluida ? " concluida" : "");
+
+        div.innerHTML = `
+          <label>
+            <input
+              type="checkbox"
+              ${tarefa.concluida ? "checked" : ""}
+              onchange="concluirTarefa(${index})"
+              style="width:auto;margin-right:8px;"
+            >
+            <span>${escaparHTML(tarefa.texto)}</span>
+          </label>
+
+          <button
+            onclick="removerTarefa(${index})"
+          >
+            ×
+          </button>
+        `;
+
+        lista.appendChild(div);
+
+      });
+
+    }
+
+
+    /* =========================
+       FINANÇAS
+    ========================== */
+
+    let movimentacoes =
+      JSON.parse(
+        localStorage.getItem("nexus_financas") || "[]"
+      );
+
+
+    function salvarFinancas() {
+
+      localStorage.setItem(
+        "nexus_financas",
+        JSON.stringify(movimentacoes)
+      );
+
+    }
+
+
+    function adicionarMovimentacao() {
+
+      const descricao =
+        document
+          .getElementById("descricaoFinanceira")
+          .value
+          .trim();
+
+      const valor =
+        parseFloat(
+          document
+            .getElementById("valorFinanceiro")
+            .value
+        );
+
+      const tipo =
+        document
+          .getElementById("tipoFinanceiro")
+          .value;
+
+
+      if (!descricao || isNaN(valor) || valor <= 0) {
+
+        alert(
+          "Informe uma descrição e um valor válido."
+        );
+
+        return;
+      }
+
+
+      movimentacoes.push({
+        descricao: descricao,
+        valor: valor,
+        tipo: tipo,
+        data: new Date().toLocaleDateString("pt-BR")
+      });
+
+
+      document.getElementById(
+        "descricaoFinanceira"
+      ).value = "";
+
+      document.getElementById(
+        "valorFinanceiro"
+      ).value = "";
+
+
+      salvarFinancas();
+
+      mostrarFinancas();
+
+    }
+
+
+    function mostrarFinancas() {
+
+      let entradas = 0;
+
+      let saidas = 0;
+
+
+      const lista =
+        document.getElementById("listaFinanceira");
+
+      lista.innerHTML = "";
+
+
+      movimentacoes.forEach((item, index) => {
+
+        if (item.tipo === "entrada") {
+
+          entradas += item.valor;
+
+        } else {
+
+          saidas += item.valor;
+
+        }
+
+
+        const div =
+          document.createElement("div");
+
+        div.className = "card";
+
+        div.style.marginBottom = "8px";
+
+
+        div.innerHTML = `
+          <strong>${escaparHTML(item.descricao)}</strong>
+
+          <p>
+            ${item.tipo === "entrada" ? "Entrada" : "Saída"}
+            —
+            ${formatarMoeda(item.valor)}
+            —
+            ${item.data}
+          </p>
+
+          <button
+            class="btn perigo"
+            onclick="removerMovimentacao(${index})"
+          >
+            Remover
+          </button>
+        `;
+
+
+        lista.appendChild(div);
+
+      });
+
+
+      const saldo =
+        entradas - saidas;
+
+
+      document.getElementById(
+        "totalEntradas"
+      ).textContent =
+        formatarMoeda(entradas);
+
+
+      document.getElementById(
+        "totalSaidas"
+      ).textContent =
+        formatarMoeda(saidas);
+
+
+      document.getElementById(
+        "saldoAtual"
+      ).textContent =
+        formatarMoeda(saldo);
+
+    }
+
+
+    function removerMovimentacao(index) {
+
+      movimentacoes.splice(index, 1);
+
+      salvarFinancas();
+
+      mostrarFinancas();
+
+    }
+
+
+    function formatarMoeda(valor) {
+
+      return valor.toLocaleString(
+        "pt-BR",
+        {
+          style: "currency",
+          currency: "BRL"
+        }
+      );
+
+    }
+
+
+    /* =========================
+       NOTAS
+    ========================== */
+
+    function carregarNotas() {
+
+      const notas =
+        localStorage.getItem("nexus_notas") || "";
+
+      document.getElementById(
+        "areaNotas"
+      ).value = notas;
+
+    }
+
+
+    function salvarNotas() {
+
+      const notas =
+        document.getElementById(
+          "areaNotas"
+        ).value;
+
+      localStorage.setItem(
+        "nexus_notas",
+        notas
+      );
+
+      alert("Notas salvas neste aparelho.");
+
+    }
+
+
+    function limparNotas() {
+
+      if (
+        confirm(
+          "Deseja realmente apagar suas notas?"
+        )
+      ) {
+
+        document.getElementById(
+          "areaNotas"
+        ).value = "";
+
+        localStorage.removeItem(
+          "nexus_notas"
+        );
+
+      }
+
+    }
+
+
+    /* =========================
+       ASSISTENTE
+    ========================== */
+
+    function enviarMensagem() {
+
+      const campo =
+        document.getElementById(
+          "mensagemUsuario"
+        );
+
+      const texto =
+        campo.value.trim();
+
+      if (!texto) return;
+
+
+      adicionarMensagem(
+        texto,
+        "usuario"
+      );
+
+
+      campo.value = "";
+
+
+      const resposta =
+        responderNexus(texto);
+
+
+      setTimeout(() => {
+
+        adicionarMensagem(
+          resposta,
+          "nexus"
+        );
+
+        falar(resposta);
+
+      }, 300);
+
+    }
+
+
+    function teclaEnter(event) {
+
+      if (event.key === "Enter") {
+
+        enviarMensagem();
+
+      }
+
+    }
+
+
+    function adicionarMensagem(
+      texto,
+      classe
+    ) {
+
+      const chat =
+        document.getElementById("chat");
+
+      const div =
+        document.createElement("div");
+
+      div.className =
+        "mensagem " + classe;
+
+      div.textContent =
+        texto;
+
+      chat.appendChild(div);
+
+      chat.scrollTop =
+        chat.scrollHeight;
+
+    }
+
+
+    function responderNexus(texto) {
+
+      const comando =
+        texto.toLowerCase();
+
+
+      if (
+        comando.includes("olá") ||
+        comando.includes("ola") ||
+        comando.includes("bom dia") ||
+        comando.includes("boa tarde") ||
+        comando.includes("boa noite")
+      ) {
+
+        return "Olá. Estou funcionando normalmente. O que vamos fazer agora?";
+
+      }
+
+
+      if (
+        comando.includes("hora") ||
+        comando.includes("horas")
+      ) {
+
+        return "Agora são " +
+          new Date().toLocaleTimeString(
+            "pt-BR"
+          );
+
+      }
+
+
+      if (
+        comando.includes("data")
+      ) {
+
+        return "Hoje é " +
+          new Date().toLocaleDateString(
+            "pt-BR"
+          );
+
+      }
+
+
+      if (
+        comando.includes("rotina")
+      ) {
+
+        abrirPorNome("rotina");
+
+        return "Abrindo sua rotina.";
+
+      }
+
+
+      if (
+        comando.includes("finança") ||
+        comando.includes("financas") ||
+        comando.includes("dinheiro")
+      ) {
+
+        abrirPorNome("financas");
+
+        return "Abrindo sua área financeira.";
+
+      }
+
+
+      if (
+        comando.includes("estudo") ||
+        comando.includes("estudar")
+      ) {
+
+        abrirPorNome("estudos");
+
+        return "Abrindo seus estudos.";
+
+      }
+
+
+      if (
+        comando.includes("nota") ||
+        comando.includes("anotação") ||
+        comando.includes("anotacao")
+      ) {
+
+        abrirPorNome("notas");
+
+        return "Abrindo suas anotações.";
+
+      }
+
+
+      if (
+        comando.includes("calculadora") ||
+        comando.includes("calcular")
+      ) {
+
+        abrirPorNome("calculadora");
+
+        return "Abrindo a calculadora.";
+
+      }
+
+
+      if (
+        comando.includes("obrigado") ||
+        comando.includes("obrigada")
+      ) {
+
+        return "Sempre à disposição.";
+
+      }
+
+
+      return "Entendi o comando. Nesta versão 1.0 ainda estou aprendendo novas funções. Podemos continuar evoluindo o Nexus.";
+
+    }
+
+
+    /* =========================
+       VOZ
+    ========================== */
+
+    function falar(texto) {
+
+      if (
+        !("speechSynthesis" in window)
+      ) {
+
+        return;
+
+      }
+
+
+      window.speechSynthesis.cancel();
+
+
+      const fala =
+        new SpeechSynthesisUtterance(
+          texto
+        );
+
+
+      fala.lang = "pt-BR";
+
+      fala.rate = 0.95;
+
+      fala.pitch = 1;
+
+
+      window.speechSynthesis.speak(
+        fala
+      );
+
+    }
+
+
+    /* =========================
+       RECONHECIMENTO DE VOZ
+    ========================== */
+
+    function iniciarVoz() {
+
+      const Reconhecimento =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+
+      if (!Reconhecimento) {
+
+        alert(
+          "O reconhecimento de voz não está disponível neste navegador."
+        );
+
+        return;
+
+      }
+
+
+      const reconhecimento =
+        new Reconhecimento();
+
+
+      reconhecimento.lang =
+        "pt-BR";
+
+
+      reconhecimento.interimResults =
+        false;
+
+
+      reconhecimento.maxAlternatives =
+        1;
+
+
+      reconhecimento.start();
+
+
+      reconhecimento.onresult =
+        function(event) {
+
+          const texto =
+            event
+              .results[0][0]
+              .transcript;
+
+
+          document.getElementById(
+            "mensagemUsuario"
+          ).value = texto;
+
+
+          enviarMensagem();
+
+        };
+
+
+      reconhecimento.onerror =
+        function() {
+
+          alert(
+            "Não foi possível reconhecer sua voz."
+          );
+
+        };
+
+    }
+
+
+    /* =========================
+       CALCULADORA
+    ========================== */
+
+    function calcAdicionar(valor) {
+
+      document.getElementById(
+        "visor"
+      ).value += valor;
+
+    }
+
+
+    function calcLimpar() {
+
+      document.getElementById(
+        "visor"
+      ).value = "";
+
+    }
+
+
+    function calcApagar() {
+
+      const visor =
+        document.getElementById(
+          "visor"
+        );
+
+      visor.value =
+        visor.value.slice(
+          0,
+          -1
+        );
+
+    }
+
+
+    function calcResultado() {
+
+      const visor =
+        document.getElementById(
+          "visor"
+        );
+
+
+      try {
+
+        const expressao =
+          visor.value
+            .replace(/%/g, "/100");
+
+
+        if (
+          !/^[0-9+\-*/().\s]+$/.test(
+            expressao
+          )
+        ) {
+
+          throw new Error();
+
+        }
+
+
+        const resultado =
+          Function(
+            '"use strict"; return (' +
+            expressao +
+            ')'
+          )();
+
+
+        visor.value =
+          Number.isFinite(resultado)
+            ? resultado
+            : "Erro";
+
+      }
+
+      catch {
+
+        visor.value =
+          "Erro";
+
+      }
+
+    }
+
+
+    /* =========================
+       SEGURANÇA DE TEXTO
+    ========================== */
+
+    function escaparHTML(texto) {
+
+      return texto
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =========================
+       APAGAR DADOS
+    ========================== */
+
+    function apagarDados() {
+
+      const confirmar =
+        confirm(
+          "Isso apagará tarefas, notas e movimentações financeiras salvas neste aparelho. Continuar?"
+        );
+
+
+      if (!confirmar) return;
+
+
+      localStorage.removeItem(
+        "nexus_tarefas"
+      );
+
+      localStorage.removeItem(
+        "nexus_financas"
+      );
+
+      localStorage.removeItem(
+        "nexus_notas"
+      );
+
+
+      tarefas = [];
+
+      movimentacoes = [];
+
+
+      mostrarTarefas();
+
+      mostrarFinancas();
+
+      carregarNotas();
+
+
+      alert(
+        "Dados locais apagados."
+      );
+
+    }
+
+
+    /* =========================
+       INICIALIZAÇÃO
+    ========================== */
+
+    mostrarTarefas();
+
+    mostrarFinancas();
+
+    carregarNotas();
+
   </script>
 
 </body>
