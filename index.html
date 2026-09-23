@@ -3,36 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b14">
 
 <title>NEXUS 1.0</title>
 
-<meta name="description"
-content="Nexus 1.0 — Seu assistente. Sua rotina. Seu controle.">
-
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#02060b;
-    color:#ffffff;
+    background:#050b14;
+    color:#fff;
     min-height:100vh;
+    overflow-x:hidden;
 }
 
-button,
-input,
-textarea,
-select{
-    font-family:inherit;
+button,input,textarea{
+    font:inherit;
 }
 
 button{
@@ -41,70 +32,71 @@ button{
 
 .app{
     width:100%;
-    max-width:520px;
     min-height:100vh;
-    margin:auto;
-    background:
-        radial-gradient(circle at top,#0b2035 0,#03070c 42%,#020408 100%);
-    padding-bottom:90px;
+    padding-bottom:85px;
 }
 
-/* =========================
-   CABEÇALHO
-========================= */
+/* CABEÇALHO */
 
-.topo{
-    padding:22px 18px 18px;
-    border-bottom:1px solid #12324a;
+.header{
     position:sticky;
     top:0;
-    z-index:50;
-    background:rgba(2,7,12,.94);
-    backdrop-filter:blur(12px);
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px;
+    background:rgba(5,11,20,.95);
+    border-bottom:1px solid #12304c;
+    backdrop-filter:blur(10px);
 }
 
 .logo{
-    color:#00aaff;
-    font-size:29px;
-    font-weight:800;
-    letter-spacing:5px;
-}
-
-.logo-sub{
-    color:#7890a3;
-    font-size:12px;
-    margin-top:5px;
-}
-
-.status-online{
-    display:inline-flex;
+    display:flex;
     align-items:center;
-    gap:6px;
-    margin-top:10px;
-    color:#80a0b5;
-    font-size:12px;
+    gap:10px;
 }
 
-.status-bolinha{
-    width:8px;
-    height:8px;
+.logo-icon{
+    width:42px;
+    height:42px;
     border-radius:50%;
-    background:#00d084;
-    box-shadow:0 0 10px #00d084;
+    border:2px solid #00aaff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#00aaff;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(0,170,255,.4);
 }
 
-/* =========================
-   TELAS
-========================= */
-
-.tela{
-    display:none;
-    padding:22px 17px;
+.logo h1{
+    font-size:21px;
+    letter-spacing:2px;
 }
 
-.tela.ativa{
+.logo small{
     display:block;
-    animation:entrada .22s ease;
+    color:#6e8297;
+    font-size:10px;
+    margin-top:2px;
+}
+
+.status{
+    font-size:11px;
+    color:#00c8ff;
+}
+
+/* TELAS */
+
+.screen{
+    display:none;
+    padding:18px;
+    animation:entrada .25s ease;
+}
+
+.screen.active{
+    display:block;
 }
 
 @keyframes entrada{
@@ -118,446 +110,381 @@ button{
     }
 }
 
-h1{
-    font-size:28px;
-    margin-bottom:7px;
-}
-
-h2{
-    font-size:19px;
-    margin-bottom:7px;
-}
-
-h3{
-    font-size:16px;
+.titulo{
     margin-bottom:6px;
+    font-size:27px;
 }
 
 .subtitulo{
-    color:#8499a9;
-    line-height:1.5;
+    color:#7f94a8;
     margin-bottom:20px;
+    font-size:14px;
 }
 
-/* =========================
-   CARTÕES
-========================= */
+/* CARTÕES */
 
 .card{
-    background:rgba(7,18,29,.92);
-    border:1px solid #12324a;
+    background:linear-gradient(145deg,#0a1523,#07101b);
+    border:1px solid #16344d;
     border-radius:18px;
     padding:17px;
-    margin-bottom:14px;
+    margin-bottom:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.card h3{
+    margin-bottom:8px;
 }
 
 .card p{
-    color:#9aabb8;
-    line-height:1.55;
+    color:#9db0c2;
+    font-size:14px;
+    line-height:1.5;
 }
 
-.card-destaque{
-    border-color:#006fae;
-    box-shadow:0 0 25px rgba(0,145,255,.08);
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
-/* =========================
-   BOTÕES
-========================= */
+@media(min-width:700px){
+    .grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+/* BOTÕES */
 
 .btn{
     width:100%;
-    padding:14px;
-    border:none;
-    border-radius:13px;
-    color:white;
-    background:#008cff;
-    font-size:15px;
-    font-weight:bold;
+    border:1px solid #16496b;
+    background:#0a1d2d;
+    color:#fff;
+    padding:13px;
+    border-radius:12px;
     margin-top:10px;
+    transition:.2s;
+}
+
+.btn:hover{
+    background:#0e2b41;
 }
 
 .btn:active{
     transform:scale(.98);
 }
 
-.btn-secundario{
-    background:#0b1b29;
-    border:1px solid #1a405a;
+.btn-primary{
+    background:#007fc4;
+    border-color:#00b7ff;
 }
 
-.btn-perigo{
-    background:#40151c;
-    border:1px solid #762733;
+.btn-danger{
+    background:#40151b;
+    border-color:#7c2732;
 }
 
-.btn-pequeno{
-    width:auto;
-    padding:10px 13px;
-    font-size:13px;
+.btn-green{
+    background:#123921;
+    border-color:#287545;
 }
 
-.voltar{
-    background:transparent;
+.icon-btn{
     border:none;
-    color:#00aaff;
-    font-size:14px;
-    margin-bottom:18px;
+    background:#0c1b2a;
+    color:#fff;
+    padding:10px;
+    border-radius:10px;
 }
 
-/* =========================
-   GRID
-========================= */
+/* INÍCIO */
 
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:11px;
-}
-
-.menu-card{
-    min-height:110px;
-    padding:16px;
-    background:#07131f;
-    color:white;
-    border:1px solid #12324a;
-    border-radius:17px;
-    text-align:left;
-}
-
-.menu-card:active{
-    transform:scale(.98);
-}
-
-.menu-icone{
-    font-size:30px;
-    display:block;
-    margin-bottom:10px;
-}
-
-.menu-titulo{
-    display:block;
-    font-size:15px;
-    font-weight:bold;
-}
-
-.menu-descricao{
-    display:block;
-    color:#708696;
-    font-size:11px;
-    margin-top:4px;
-}
-
-/* =========================
-   NEXUS / VOZ
-========================= */
-
-.nexus-centro{
+.welcome{
     text-align:center;
+    padding:25px 5px;
 }
 
-.nexus-orbe{
-    width:145px;
-    height:145px;
-    margin:25px auto;
+.nexus-core{
+    width:120px;
+    height:120px;
+    margin:0 auto 20px;
     border-radius:50%;
+    border:2px solid #00aaff;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:58px;
-    background:
-        radial-gradient(circle,#0c9fff 0,#075080 38%,#03111e 72%);
-    border:1px solid #168dcc;
     box-shadow:
-        0 0 25px rgba(0,153,255,.25),
-        inset 0 0 25px rgba(0,153,255,.2);
-}
-
-.nexus-orbe.ouvindo{
-    animation:pulsar 1s infinite;
+        0 0 20px rgba(0,170,255,.4),
+        inset 0 0 25px rgba(0,170,255,.12);
+    animation:pulsar 2.5s infinite;
 }
 
 @keyframes pulsar{
-    0%,100%{
-        transform:scale(1);
-        box-shadow:0 0 25px rgba(0,153,255,.25);
-    }
     50%{
-        transform:scale(1.07);
-        box-shadow:0 0 55px rgba(0,153,255,.6);
+        box-shadow:
+        0 0 40px rgba(0,170,255,.6),
+        inset 0 0 30px rgba(0,170,255,.2);
     }
 }
 
-#resultadoVoz{
-    min-height:50px;
-    color:#91a7b6;
-    line-height:1.5;
+.nexus-core span{
+    font-size:30px;
+    font-weight:bold;
+    color:#00b7ff;
 }
 
-/* =========================
-   FORMULÁRIOS
-========================= */
+.saudacao{
+    font-size:23px;
+    margin-bottom:8px;
+}
 
-input,
-textarea,
-select{
+.hora{
+    color:#00b7ff;
+    font-size:17px;
+}
+
+/* COMANDO DE VOZ */
+
+.voice-box{
+    text-align:center;
+}
+
+.voice-button{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    border:2px solid #00aaff;
+    background:#071827;
+    color:#00b7ff;
+    font-size:38px;
+    box-shadow:0 0 25px rgba(0,170,255,.25);
+    margin:10px auto 15px;
+    display:block;
+}
+
+.voice-button.ouvindo{
+    animation:ouvindo 1s infinite;
+    background:#0b3044;
+}
+
+@keyframes ouvindo{
+    50%{
+        transform:scale(1.08);
+        box-shadow:0 0 45px rgba(0,170,255,.8);
+    }
+}
+
+.voice-status{
+    color:#91a8bb;
+    font-size:13px;
+}
+
+.comando{
+    margin-top:15px;
+    min-height:45px;
+    padding:12px;
+    border-radius:10px;
+    background:#06111d;
+    border:1px solid #12304c;
+    color:#00b7ff;
+}
+
+/* FORMULÁRIOS */
+
+.input{
     width:100%;
-    background:#030911;
-    color:#fff;
-    border:1px solid #173b55;
-    border-radius:12px;
     padding:13px;
+    margin-top:9px;
+    border-radius:11px;
+    border:1px solid #193b55;
+    background:#050e18;
+    color:#fff;
     outline:none;
-    margin-top:8px;
 }
 
-input:focus,
-textarea:focus,
-select:focus{
-    border-color:#008cff;
+.input:focus{
+    border-color:#00aaff;
 }
 
-textarea{
-    min-height:160px;
+textarea.input{
+    min-height:110px;
     resize:vertical;
 }
 
 label{
     display:block;
-    color:#91a4b2;
-    font-size:13px;
     margin-top:12px;
+    color:#9db0c2;
+    font-size:13px;
 }
 
-/* =========================
-   LISTAS
-========================= */
+/* LISTAS */
 
 .lista{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
+    margin-top:15px;
 }
 
 .item{
-    background:#07131e;
-    border:1px solid #123149;
-    border-radius:13px;
-    padding:13px;
-}
-
-.item-topo{
     display:flex;
+    align-items:center;
     justify-content:space-between;
     gap:10px;
-}
-
-.item-titulo{
-    font-weight:bold;
+    padding:13px;
+    background:#081521;
+    border:1px solid #12304c;
+    border-radius:12px;
+    margin-bottom:9px;
 }
 
 .item-info{
-    color:#7e94a4;
+    flex:1;
+}
+
+.item-title{
+    font-weight:bold;
+}
+
+.item-desc{
+    color:#8499aa;
     font-size:12px;
     margin-top:4px;
 }
 
-/* =========================
-   VALORES
-========================= */
+/* FINANÇAS */
 
-.valor-grande{
-    color:#00aaff;
-    font-size:30px;
+.valor{
+    font-size:28px;
     font-weight:bold;
+    color:#00c8ff;
+    margin-top:5px;
 }
 
-.valor-verde{
-    color:#00d084;
+.positivo{
+    color:#48dc7a;
 }
 
-.valor-vermelho{
-    color:#ff6474;
+.negativo{
+    color:#ff6675;
 }
 
-.resumo-financeiro{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
+/* NAVEGAÇÃO */
 
-.resumo{
-    background:#06111c;
-    border:1px solid #123149;
-    border-radius:14px;
-    padding:13px;
-}
-
-.resumo small{
-    color:#708696;
-    display:block;
-    margin-bottom:6px;
-}
-
-.resumo strong{
-    font-size:17px;
-}
-
-/* =========================
-   CHECKLIST
-========================= */
-
-.check{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:12px 0;
-    border-bottom:1px solid #102536;
-}
-
-.check input{
-    width:20px;
-    height:20px;
-    margin:0;
-}
-
-/* =========================
-   NAVEGAÇÃO
-========================= */
-
-.navegacao{
+.nav{
     position:fixed;
-    left:50%;
+    z-index:200;
     bottom:0;
-    transform:translateX(-50%);
-    width:min(520px,100%);
-    height:76px;
-    background:rgba(4,11,18,.97);
-    border-top:1px solid #123149;
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    z-index:100;
-    backdrop-filter:blur(15px);
+    left:0;
+    right:0;
+    height:72px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    background:rgba(5,11,20,.97);
+    border-top:1px solid #12304c;
+    backdrop-filter:blur(12px);
 }
 
-.nav-btn{
-    border:none;
+.nav button{
+    flex:1;
+    height:100%;
+    border:0;
     background:transparent;
-    color:#60798a;
-    font-size:10px;
+    color:#6f8498;
+    font-size:11px;
 }
 
-.nav-btn span{
+.nav button span{
     display:block;
     font-size:21px;
     margin-bottom:4px;
 }
 
-.nav-btn.ativo{
-    color:#00aaff;
+.nav button.active{
+    color:#00b7ff;
 }
 
-/* =========================
-   CONFIGURAÇÕES
-========================= */
+/* MODAL */
 
-.config-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 0;
-    border-bottom:1px solid #102536;
-}
-
-.config-item:last-child{
-    border-bottom:none;
-}
-
-.config-esquerda strong{
-    display:block;
-    margin-bottom:4px;
-}
-
-.config-esquerda small{
-    color:#708696;
-}
-
-.switch{
-    width:48px;
-    height:26px;
-    border-radius:20px;
-    background:#243746;
-    position:relative;
-    border:none;
-}
-
-.switch::after{
-    content:"";
-    position:absolute;
-    width:20px;
-    height:20px;
-    top:3px;
-    left:4px;
-    border-radius:50%;
-    background:#fff;
-    transition:.2s;
-}
-
-.switch.ligado{
-    background:#008cff;
-}
-
-.switch.ligado::after{
-    left:24px;
-}
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
+.modal{
     position:fixed;
-    left:50%;
-    bottom:90px;
-    transform:translateX(-50%) translateY(20px);
-    background:#102332;
-    border:1px solid #24506b;
-    padding:12px 16px;
-    border-radius:12px;
-    color:white;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
-    z-index:300;
-    max-width:90%;
+    inset:0;
+    z-index:500;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.75);
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-content{
+    width:100%;
+    max-width:500px;
+    max-height:85vh;
+    overflow:auto;
+    background:#07111c;
+    border:1px solid #174564;
+    border-radius:18px;
+    padding:20px;
+}
+
+.modal-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+/* ALERTA */
+
+.alerta{
+    position:fixed;
+    z-index:1000;
+    left:15px;
+    right:15px;
+    top:75px;
+    background:#081c2b;
+    border:1px solid #00aaff;
+    border-radius:13px;
+    padding:14px;
+    display:none;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+.alerta.show{
+    display:block;
+}
+
+.alerta strong{
+    color:#00b7ff;
+}
+
+/* PEQUENOS */
+
+.vazio{
     text-align:center;
-    font-size:13px;
+    color:#667d90;
+    padding:20px;
 }
 
-.toast.mostrar{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:20px;
+    background:#092438;
+    color:#00b7ff;
+    font-size:10px;
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
-
-@media(max-width:360px){
-
-    .grid{
-        grid-template-columns:1fr;
-    }
-
-    .logo{
-        font-size:25px;
-    }
-
-    h1{
-        font-size:25px;
-    }
+hr{
+    border:0;
+    border-top:1px solid #12304c;
+    margin:15px 0;
 }
-
 </style>
 </head>
 
@@ -565,18 +492,622 @@ label{
 
 <div class="app">
 
-<!-- =========================
-     CABEÇALHO
-========================= -->
-
-<header class="topo">
-
-    <div class="logo">NEXUS</div>
-
-    <div class="logo-sub">
-        Seu assistente. Sua rotina. Seu controle.
+<header class="header">
+    <div class="logo">
+        <div class="logo-icon">N</div>
+        <div>
+            <h1>NEXUS</h1>
+            <small>ASSISTENTE PESSOAL 1.0</small>
+        </div>
     </div>
 
-    <div class="status-online">
-        <span class="status-bolinha"></span>
-        Nexus
+    <div class="status" id="statusSistema">
+        ● ONLINE
+    </div>
+</header>
+
+
+<!-- ================= INÍCIO ================= -->
+
+<section class="screen active" id="inicio">
+
+    <div class="welcome">
+
+        <div class="nexus-core">
+            <span>N</span>
+        </div>
+
+        <div class="saudacao" id="saudacao">
+            Olá, Emerson.
+        </div>
+
+        <div class="hora" id="horaAtual">
+            00:00:00
+        </div>
+
+        <p style="color:#7f94a8;margin-top:10px;">
+            Seu assistente. Sua rotina. Seu controle.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+        <h3>🎙️ Comando rápido</h3>
+
+        <p>
+            Toque no botão e fale com o Nexus.
+        </p>
+
+        <button class="voice-button" id="btnVoz">
+            🎙️
+        </button>
+
+        <div class="voice-status" id="statusVoz">
+            Toque para falar
+        </div>
+
+        <div class="comando" id="ultimoComando">
+            Aguardando comando...
+        </div>
+    </div>
+
+
+    <div class="grid">
+
+        <button class="card" onclick="abrirTela('rotina')">
+            ⏰
+            <h3>Rotina</h3>
+            <p>Organize seu dia.</p>
+        </button>
+
+        <button class="card" onclick="abrirTela('notas')">
+            📝
+            <h3>Notas</h3>
+            <p>Suas anotações.</p>
+        </button>
+
+        <button class="card" onclick="abrirTela('financas')">
+            💰
+            <h3>Finanças</h3>
+            <p>Controle seu dinheiro.</p>
+        </button>
+
+        <button class="card" onclick="abrirTela('estudos')">
+            📚
+            <h3>Estudos</h3>
+            <p>Organize seu aprendizado.</p>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ROTINA ================= -->
+
+<section class="screen" id="rotina">
+
+    <h2 class="titulo">Rotina</h2>
+
+    <p class="subtitulo">
+        Organize tarefas e horários.
+    </p>
+
+    <div class="card">
+
+        <h3>➕ Nova tarefa</h3>
+
+        <input
+            class="input"
+            id="tarefaTexto"
+            placeholder="Ex.: Acordar às 05:00"
+        >
+
+        <input
+            class="input"
+            id="tarefaHora"
+            type="time"
+        >
+
+        <button class="btn btn-primary" onclick="adicionarTarefa()">
+            Adicionar tarefa
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h3>📋 Minhas tarefas</h3>
+
+        <div id="listaTarefas" class="lista"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= NOTAS ================= -->
+
+<section class="screen" id="notas">
+
+    <h2 class="titulo">Notas</h2>
+
+    <p class="subtitulo">
+        Guarde informações importantes.
+    </p>
+
+    <div class="card">
+
+        <input
+            class="input"
+            id="notaTitulo"
+            placeholder="Título da nota"
+        >
+
+        <textarea
+            class="input"
+            id="notaTexto"
+            placeholder="Escreva sua nota..."
+        ></textarea>
+
+        <button class="btn btn-primary" onclick="adicionarNota()">
+            Salvar nota
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h3>📝 Minhas notas</h3>
+
+        <div id="listaNotas" class="lista"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FINANÇAS ================= -->
+
+<section class="screen" id="financas">
+
+    <h2 class="titulo">Finanças</h2>
+
+    <p class="subtitulo">
+        Controle entradas, gastos e saldo.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <p>Entradas</p>
+            <div class="valor positivo" id="totalEntradas">
+                R$ 0,00
+            </div>
+        </div>
+
+        <div class="card">
+            <p>Gastos</p>
+            <div class="valor negativo" id="totalGastos">
+                R$ 0,00
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <p>Saldo</p>
+
+        <div class="valor" id="saldoAtual">
+            R$ 0,00
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>➕ Registrar movimentação</h3>
+
+        <select class="input" id="tipoMovimento">
+            <option value="entrada">Entrada</option>
+            <option value="gasto">Gasto</option>
+        </select>
+
+        <input
+            class="input"
+            id="movimentoDescricao"
+            placeholder="Descrição"
+        >
+
+        <input
+            class="input"
+            id="movimentoValor"
+            type="number"
+            step="0.01"
+            placeholder="Valor"
+        >
+
+        <button class="btn btn-primary" onclick="adicionarMovimento()">
+            Registrar
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>📊 Histórico</h3>
+
+        <div id="listaMovimentos" class="lista"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= RESERVA ================= -->
+
+<section class="screen" id="reserva">
+
+    <h2 class="titulo">Reserva</h2>
+
+    <p class="subtitulo">
+        Acompanhe seu objetivo de economia.
+    </p>
+
+    <div class="card">
+
+        <p>Total reservado</p>
+
+        <div class="valor" id="totalReserva">
+            R$ 0,00
+        </div>
+
+        <hr>
+
+        <label>Meta da reserva</label>
+
+        <input
+            class="input"
+            id="metaReserva"
+            type="number"
+            step="0.01"
+            placeholder="Ex.: 5000"
+        >
+
+        <button class="btn" onclick="salvarMetaReserva()">
+            Salvar meta
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>💵 Adicionar dinheiro</h3>
+
+        <input
+            class="input"
+            id="valorReserva"
+            type="number"
+            step="0.01"
+            placeholder="Valor"
+        >
+
+        <button class="btn btn-green" onclick="adicionarReserva()">
+            Adicionar à reserva
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>📈 Progresso</h3>
+
+        <div id="progressoReserva">
+            Meta não definida.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ESTUDOS ================= -->
+
+<section class="screen" id="estudos">
+
+    <h2 class="titulo">Estudos</h2>
+
+    <p class="subtitulo">
+        Organize seus conhecimentos.
+    </p>
+
+    <div class="card">
+
+        <h3>📚 Meus módulos</h3>
+
+        <div class="lista">
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Informática</div>
+                    <div class="item-desc">Básica → intermediária → avançada</div>
+                </div>
+                <span class="badge">MÓDULO 1</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Programação</div>
+                    <div class="item-desc">Lógica, HTML, CSS e JavaScript</div>
+                </div>
+                <span class="badge">MÓDULO 2</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Tecnologia</div>
+                    <div class="item-desc">Computadores, internet e sistemas</div>
+                </div>
+                <span class="badge">MÓDULO 3</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Mecânica</div>
+                    <div class="item-desc">Carros, motos e equipamentos</div>
+                </div>
+                <span class="badge">MÓDULO 4</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Eletricista</div>
+                    <div class="item-desc">Fundamentos elétricos</div>
+                </div>
+                <span class="badge">MÓDULO 5</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Administração</div>
+                    <div class="item-desc">Organização e negócios</div>
+                </div>
+                <span class="badge">MÓDULO 6</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Educação financeira</div>
+                    <div class="item-desc">Controle, economia e investimentos</div>
+                </div>
+                <span class="badge">MÓDULO 7</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Hábitos e rotina</div>
+                    <div class="item-desc">Organização pessoal</div>
+                </div>
+                <span class="badge">MÓDULO 8</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= GPS ================= -->
+
+<section class="screen" id="gps">
+
+    <h2 class="titulo">GPS</h2>
+
+    <p class="subtitulo">
+        Abra rapidamente serviços de navegação.
+    </p>
+
+    <div class="card">
+
+        <h3>📍 Google Maps</h3>
+
+        <input
+            class="input"
+            id="destinoMaps"
+            placeholder="Digite o destino"
+        >
+
+        <button class="btn btn-primary" onclick="abrirMaps()">
+            Abrir rota
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h3>🚗 Waze</h3>
+
+        <input
+            class="input"
+            id="destinoWaze"
+            placeholder="Digite o destino"
+        >
+
+        <button class="btn btn-primary" onclick="abrirWaze()">
+            Abrir Waze
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MÚSICA ================= -->
+
+<section class="screen" id="musica">
+
+    <h2 class="titulo">Música</h2>
+
+    <p class="subtitulo">
+        Acesse suas plataformas.
+    </p>
+
+    <div class="card">
+
+        <button class="btn btn-primary" onclick="abrirSite('https://open.spotify.com/')">
+            🎵 Abrir Spotify
+        </button>
+
+        <button class="btn" onclick="abrirSite('https://www.youtube.com/')">
+            ▶️ Abrir YouTube
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= NOTIFICAÇÕES ================= -->
+
+<section class="screen" id="notificacoes">
+
+    <h2 class="titulo">Notificações</h2>
+
+    <p class="subtitulo">
+        Central de informações do Nexus.
+    </p>
+
+    <div class="card">
+
+        <h3>🔔 Status</h3>
+
+        <p>
+            O navegador não permite que esta versão web leia
+            automaticamente todas as notificações do Android ou
+            do WhatsApp.
+        </p>
+
+        <button class="btn" onclick="mostrarAlerta('As notificações completas serão adicionadas na versão Android do Nexus.')">
+            Ver informações
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONFIGURAÇÕES ================= -->
+
+<section class="screen" id="config">
+
+    <h2 class="titulo">Configurações</h2>
+
+    <p class="subtitulo">
+        Controle básico do Nexus.
+    </p>
+
+    <div class="card">
+
+        <h3>👤 Usuário</h3>
+
+        <input
+            class="input"
+            id="nomeUsuario"
+            placeholder="Seu nome"
+        >
+
+        <button class="btn btn-primary" onclick="salvarNome()">
+            Salvar nome
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>🔊 Voz</h3>
+
+        <button class="btn" onclick="testarVoz()">
+            Testar voz do Nexus
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>🗑️ Dados</h3>
+
+        <button class="btn btn-danger" onclick="limparDados()">
+            Apagar dados do Nexus
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= NAVEGAÇÃO ================= -->
+
+<nav class="nav">
+
+    <button data-tela="inicio" onclick="abrirTela('inicio')">
+        <span>⌂</span>
+        Início
+    </button>
+
+    <button data-tela="rotina" onclick="abrirTela('rotina')">
+        <span>⏰</span>
+        Rotina
+    </button>
+
+    <button data-tela="notas" onclick="abrirTela('notas')">
+        <span>📝</span>
+        Notas
+    </button>
+
+    <button data-tela="financas" onclick="abrirTela('financas')">
+        <span>💰</span>
+        Finanças
+    </button>
+
+    <button data-tela="config" onclick="abrirTela('config')">
+        <span>⚙️</span>
+        Config.
+    </button>
+
+</nav>
+
+</div>
+
+
+<!-- ================= ALERTA ================= -->
+
+<div class="alerta" id="alerta">
+    <strong>NEXUS</strong>
+    <div id="textoAlerta" style="margin-top:5px;"></div>
+</div>
+
+
+<script>
+
+/* =========================================================
+   NEXUS 1.0
+   SISTEMA PRINCIPAL
+========================================================= */
+
+
+/* ---------- DADOS ---------- */
+
+let tarefas =
+    JSON.parse(localStorage.getItem("nexus_tarefas")) || [];
+
+let notas =
+    JSON.parse(localStorag
