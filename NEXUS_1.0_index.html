@@ -3,235 +3,487 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b14">
 
 <title>NEXUS 1.0</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-body {
-    background: #05080d;
-    color: white;
-    min-height: 100vh;
+body{
+    background:#050b14;
+    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
-.app {
-    max-width: 500px;
-    margin: auto;
-    min-height: 100vh;
-    background: linear-gradient(180deg, #07111c, #020408);
-    position: relative;
-    padding-bottom: 85px;
+button,input,textarea{
+    font:inherit;
 }
 
-/* TOPO */
-header {
-    padding: 25px 20px 15px;
-    border-bottom: 1px solid #12314a;
+button{
+    cursor:pointer;
 }
 
-.logo {
-    font-size: 30px;
-    font-weight: bold;
-    letter-spacing: 4px;
-    color: #00aaff;
+.app{
+    width:100%;
+    min-height:100vh;
+    padding-bottom:85px;
 }
 
-.status {
-    margin-top: 6px;
-    color: #6f8799;
-    font-size: 13px;
+/* CABEÇALHO */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px;
+    background:rgba(5,11,20,.95);
+    border-bottom:1px solid #12304c;
+    backdrop-filter:blur(10px);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:2px solid #00aaff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#00aaff;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(0,170,255,.4);
+}
+
+.logo h1{
+    font-size:21px;
+    letter-spacing:2px;
+}
+
+.logo small{
+    display:block;
+    color:#6e8297;
+    font-size:10px;
+    margin-top:2px;
+}
+
+.status{
+    font-size:11px;
+    color:#00c8ff;
 }
 
 /* TELAS */
-.tela {
-    display: none;
-    padding: 22px 18px;
-    animation: aparecer .2s ease;
+
+.screen{
+    display:none;
+    padding:18px;
+    animation:entrada .25s ease;
 }
 
-.tela.ativa {
-    display: block;
+.screen.active{
+    display:block;
 }
 
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
+@keyframes entrada{
+    from{
+        opacity:0;
+        transform:translateY(8px);
     }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
 }
 
-h1 {
-    font-size: 27px;
-    margin-bottom: 8px;
+.titulo{
+    margin-bottom:6px;
+    font-size:27px;
 }
 
-h2 {
-    font-size: 19px;
-    margin-bottom: 8px;
+.subtitulo{
+    color:#7f94a8;
+    margin-bottom:20px;
+    font-size:14px;
 }
 
-.subtitulo {
-    color: #8295a5;
-    margin-bottom: 25px;
+/* CARTÕES */
+
+.card{
+    background:linear-gradient(145deg,#0a1523,#07101b);
+    border:1px solid #16344d;
+    border-radius:18px;
+    padding:17px;
+    margin-bottom:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
 }
 
-/* CARTÃO */
-.card {
-    background: #09131e;
-    border: 1px solid #12314a;
-    border-radius: 16px;
-    padding: 18px;
-    margin-bottom: 15px;
+.card h3{
+    margin-bottom:8px;
 }
 
-.card p {
-    color: #9eb0bd;
-    line-height: 1.5;
+.card p{
+    color:#9db0c2;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+@media(min-width:700px){
+    .grid{
+        grid-template-columns:repeat(3,1fr);
+    }
 }
 
 /* BOTÕES */
-button {
-    border: none;
-    cursor: pointer;
+
+.btn{
+    width:100%;
+    border:1px solid #16496b;
+    background:#0a1d2d;
+    color:#fff;
+    padding:13px;
+    border-radius:12px;
+    margin-top:10px;
+    transition:.2s;
 }
 
-.botao-principal {
-    width: 100%;
-    padding: 17px;
-    border-radius: 14px;
-    background: #008cff;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 10px;
+.btn:hover{
+    background:#0e2b41;
 }
 
-.botao-principal:active {
-    transform: scale(.98);
+.btn:active{
+    transform:scale(.98);
 }
 
-.grade {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+.btn-primary{
+    background:#007fc4;
+    border-color:#00b7ff;
 }
 
-.botao-menu {
-    min-height: 105px;
-    border-radius: 16px;
-    background: #09131e;
-    border: 1px solid #12314a;
-    color: white;
-    font-size: 16px;
-    padding: 15px;
+.btn-danger{
+    background:#40151b;
+    border-color:#7c2732;
 }
 
-.botao-menu span {
-    display: block;
-    font-size: 30px;
-    margin-bottom: 8px;
+.btn-green{
+    background:#123921;
+    border-color:#287545;
 }
 
-/* VOZ */
-.microfone {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: #008cff;
-    color: white;
-    font-size: 45px;
-    display: block;
-    margin: 30px auto 20px;
-    box-shadow: 0 0 30px rgba(0,140,255,.35);
+.icon-btn{
+    border:none;
+    background:#0c1b2a;
+    color:#fff;
+    padding:10px;
+    border-radius:10px;
 }
 
-#resultadoVoz {
-    text-align: center;
-    color: #8ea4b5;
-    min-height: 30px;
+/* INÍCIO */
+
+.welcome{
+    text-align:center;
+    padding:25px 5px;
 }
 
-/* NOTAS */
-textarea,
-input {
-    width: 100%;
-    background: #050b12;
-    color: white;
-    border: 1px solid #193b55;
-    border-radius: 12px;
-    padding: 14px;
-    outline: none;
-    font-size: 16px;
+.nexus-core{
+    width:120px;
+    height:120px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    border:2px solid #00aaff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:
+        0 0 20px rgba(0,170,255,.4),
+        inset 0 0 25px rgba(0,170,255,.12);
+    animation:pulsar 2.5s infinite;
 }
 
-textarea {
-    min-height: 180px;
-    resize: vertical;
+@keyframes pulsar{
+    50%{
+        box-shadow:
+        0 0 40px rgba(0,170,255,.6),
+        inset 0 0 30px rgba(0,170,255,.2);
+    }
+}
+
+.nexus-core span{
+    font-size:30px;
+    font-weight:bold;
+    color:#00b7ff;
+}
+
+.saudacao{
+    font-size:23px;
+    margin-bottom:8px;
+}
+
+.hora{
+    color:#00b7ff;
+    font-size:17px;
+}
+
+/* COMANDO DE VOZ */
+
+.voice-box{
+    text-align:center;
+}
+
+.voice-button{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    border:2px solid #00aaff;
+    background:#071827;
+    color:#00b7ff;
+    font-size:38px;
+    box-shadow:0 0 25px rgba(0,170,255,.25);
+    margin:10px auto 15px;
+    display:block;
+}
+
+.voice-button.ouvindo{
+    animation:ouvindo 1s infinite;
+    background:#0b3044;
+}
+
+@keyframes ouvindo{
+    50%{
+        transform:scale(1.08);
+        box-shadow:0 0 45px rgba(0,170,255,.8);
+    }
+}
+
+.voice-status{
+    color:#91a8bb;
+    font-size:13px;
+}
+
+.comando{
+    margin-top:15px;
+    min-height:45px;
+    padding:12px;
+    border-radius:10px;
+    background:#06111d;
+    border:1px solid #12304c;
+    color:#00b7ff;
+}
+
+/* FORMULÁRIOS */
+
+.input{
+    width:100%;
+    padding:13px;
+    margin-top:9px;
+    border-radius:11px;
+    border:1px solid #193b55;
+    background:#050e18;
+    color:#fff;
+    outline:none;
+}
+
+.input:focus{
+    border-color:#00aaff;
+}
+
+textarea.input{
+    min-height:110px;
+    resize:vertical;
+}
+
+label{
+    display:block;
+    margin-top:12px;
+    color:#9db0c2;
+    font-size:13px;
+}
+
+/* LISTAS */
+
+.lista{
+    margin-top:15px;
+}
+
+.item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:13px;
+    background:#081521;
+    border:1px solid #12304c;
+    border-radius:12px;
+    margin-bottom:9px;
+}
+
+.item-info{
+    flex:1;
+}
+
+.item-title{
+    font-weight:bold;
+}
+
+.item-desc{
+    color:#8499aa;
+    font-size:12px;
+    margin-top:4px;
 }
 
 /* FINANÇAS */
-.valor {
-    font-size: 30px;
-    color: #00aaff;
-    font-weight: bold;
+
+.valor{
+    font-size:28px;
+    font-weight:bold;
+    color:#00c8ff;
+    margin-top:5px;
 }
 
-/* BARRA INFERIOR */
-nav {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(500px, 100%);
-    height: 75px;
-    background: #07101a;
-    border-top: 1px solid #12314a;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    z-index: 100;
+.positivo{
+    color:#48dc7a;
 }
 
-nav button {
-    background: transparent;
-    color: #718797;
-    font-size: 12px;
+.negativo{
+    color:#ff6675;
 }
 
-nav button span {
-    display: block;
-    font-size: 22px;
-    margin-bottom: 4px;
+/* NAVEGAÇÃO */
+
+.nav{
+    position:fixed;
+    z-index:200;
+    bottom:0;
+    left:0;
+    right:0;
+    height:72px;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    background:rgba(5,11,20,.97);
+    border-top:1px solid #12304c;
+    backdrop-filter:blur(12px);
 }
 
-nav button.ativo {
-    color: #00aaff;
+.nav button{
+    flex:1;
+    height:100%;
+    border:0;
+    background:transparent;
+    color:#6f8498;
+    font-size:11px;
 }
 
-/* CONFIGURAÇÕES */
-.config-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 0;
-    border-bottom: 1px solid #122536;
+.nav button span{
+    display:block;
+    font-size:21px;
+    margin-bottom:4px;
 }
 
-.voltar {
-    background: transparent;
-    color: #00aaff;
-    font-size: 15px;
-    margin-bottom: 20px;
+.nav button.active{
+    color:#00b7ff;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:500;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.75);
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-content{
+    width:100%;
+    max-width:500px;
+    max-height:85vh;
+    overflow:auto;
+    background:#07111c;
+    border:1px solid #174564;
+    border-radius:18px;
+    padding:20px;
+}
+
+.modal-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+/* ALERTA */
+
+.alerta{
+    position:fixed;
+    z-index:1000;
+    left:15px;
+    right:15px;
+    top:75px;
+    background:#081c2b;
+    border:1px solid #00aaff;
+    border-radius:13px;
+    padding:14px;
+    display:none;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+.alerta.show{
+    display:block;
+}
+
+.alerta strong{
+    color:#00b7ff;
+}
+
+/* PEQUENOS */
+
+.vazio{
+    text-align:center;
+    color:#667d90;
+    padding:20px;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:20px;
+    background:#092438;
+    color:#00b7ff;
+    font-size:10px;
+}
+
+hr{
+    border:0;
+    border-top:1px solid #12304c;
+    margin:15px 0;
 }
 </style>
 </head>
@@ -240,155 +492,91 @@ nav button.ativo {
 
 <div class="app">
 
-<header>
-    <div class="logo">NEXUS</div>
-    <div class="status">Seu assistente. Sua rotina. Seu controle.</div>
+<header class="header">
+    <div class="logo">
+        <div class="logo-icon">N</div>
+        <div>
+            <h1>NEXUS</h1>
+            <small>ASSISTENTE PESSOAL 1.0</small>
+        </div>
+    </div>
+
+    <div class="status" id="statusSistema">
+        ● ONLINE
+    </div>
 </header>
 
 
-<!-- INÍCIO -->
-<section id="inicio" class="tela ativa">
+<!-- ================= INÍCIO ================= -->
 
-    <h1>Olá 👋</h1>
+<section class="screen active" id="inicio">
 
-    <p class="subtitulo">
-        O que vamos fazer hoje?
-    </p>
+    <div class="welcome">
 
-    <div class="card">
-        <h2>NEXUS 1.0</h2>
-        <p>
-            Assistente pessoal para organizar sua rotina,
-            notas, finanças e comandos de voz.
+        <div class="nexus-core">
+            <span>N</span>
+        </div>
+
+        <div class="saudacao" id="saudacao">
+            Olá, Emerson.
+        </div>
+
+        <div class="hora" id="horaAtual">
+            00:00:00
+        </div>
+
+        <p style="color:#7f94a8;margin-top:10px;">
+            Seu assistente. Sua rotina. Seu controle.
         </p>
 
-        <button class="botao-principal"
-                onclick="abrirTela('nexus')">
-            🎙️ Falar com Nexus
-        </button>
     </div>
 
-    <div class="grade">
-
-        <button class="botao-menu"
-                onclick="abrirTela('rotina')">
-            <span>⏰</span>
-            Rotina
-        </button>
-
-        <button class="botao-menu"
-                onclick="abrirTela('notas')">
-            <span>📝</span>
-            Notas
-        </button>
-
-        <button class="botao-menu"
-                onclick="abrirTela('financas')">
-            <span>💰</span>
-            Finanças
-        </button>
-
-        <button class="botao-menu"
-                onclick="abrirTela('config')">
-            <span>⚙️</span>
-            Configurações
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- NEXUS -->
-<section id="nexus" class="tela">
-
-    <button class="voltar"
-            onclick="abrirTela('inicio')">
-        ← Voltar
-    </button>
-
-    <h1>Nexus</h1>
-
-    <p class="subtitulo">
-        Comando de voz
-    </p>
 
     <div class="card">
+        <h3>🎙️ Comando rápido</h3>
 
         <p>
             Toque no botão e fale com o Nexus.
         </p>
 
-        <button class="microfone"
-                onclick="iniciarVoz()">
+        <button class="voice-button" id="btnVoz">
             🎙️
         </button>
 
-        <div id="resultadoVoz">
-            Aguardando comando...
+        <div class="voice-status" id="statusVoz">
+            Toque para falar
         </div>
 
+        <div class="comando" id="ultimoComando">
+            Aguardando comando...
+        </div>
     </div>
 
-</section>
 
+    <div class="grid">
 
-<!-- ROTINA -->
-<section id="rotina" class="tela">
+        <button class="card" onclick="abrirTela('rotina')">
+            ⏰
+            <h3>Rotina</h3>
+            <p>Organize seu dia.</p>
+        </button>
 
-    <button class="voltar"
-            onclick="abrirTela('inicio')">
-        ← Voltar
-    </button>
+        <button class="card" onclick="abrirTela('notas')">
+            📝
+            <h3>Notas</h3>
+            <p>Suas anotações.</p>
+        </button>
 
-    <h1>Rotina</h1>
+        <button class="card" onclick="abrirTela('financas')">
+            💰
+            <h3>Finanças</h3>
+            <p>Controle seu dinheiro.</p>
+        </button>
 
-    <p class="subtitulo">
-        Organize seu dia.
-    </p>
-
-    <div class="card">
-        <h2>🌅 Manhã</h2>
-        <p>05:00 — Acordar</p>
-        <p>05:10 — Água</p>
-        <p>05:20 — Exercícios</p>
-    </div>
-
-    <div class="card">
-        <h2>📚 Estudos</h2>
-        <p>Reserve um período para aprender.</p>
-    </div>
-
-    <button class="botao-principal"
-            onclick="alert('Função de rotina será expandida no Nexus 1.1')">
-        + Adicionar rotina
-    </button>
-
-</section>
-
-
-<!-- NOTAS -->
-<section id="notas" class="tela">
-
-    <button class="voltar"
-            onclick="abrirTela('inicio')">
-        ← Voltar
-    </button>
-
-    <h1>Notas</h1>
-
-    <p class="subtitulo">
-        Escreva e salve suas ideias.
-    </p>
-
-    <div class="card">
-
-        <textarea id="campoNotas"
-                  placeholder="Digite sua nota aqui..."></textarea>
-
-        <button class="botao-principal"
-                onclick="salvarNota()">
-            💾 Salvar nota
+        <button class="card" onclick="abrirTela('estudos')">
+            📚
+            <h3>Estudos</h3>
+            <p>Organize seu aprendizado.</p>
         </button>
 
     </div>
@@ -396,35 +584,364 @@ nav button.ativo {
 </section>
 
 
-<!-- FINANÇAS -->
-<section id="financas" class="tela">
+<!-- ================= ROTINA ================= -->
 
-    <button class="voltar"
-            onclick="abrirTela('inicio')">
-        ← Voltar
-    </button>
+<section class="screen" id="rotina">
 
-    <h1>Finanças</h1>
+    <h2 class="titulo">Rotina</h2>
 
     <p class="subtitulo">
-        Controle seu dinheiro.
+        Organize tarefas e horários.
     </p>
 
     <div class="card">
-        <h2>Saldo</h2>
-        <div class="valor" id="saldo">R$ 0,00</div>
+
+        <h3>➕ Nova tarefa</h3>
+
+        <input
+            class="input"
+            id="tarefaTexto"
+            placeholder="Ex.: Acordar às 05:00"
+        >
+
+        <input
+            class="input"
+            id="tarefaHora"
+            type="time"
+        >
+
+        <button class="btn btn-primary" onclick="adicionarTarefa()">
+            Adicionar tarefa
+        </button>
+
     </div>
+
+    <div class="card">
+
+        <h3>📋 Minhas tarefas</h3>
+
+        <div id="listaTarefas" class="lista"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= NOTAS ================= -->
+
+<section class="screen" id="notas">
+
+    <h2 class="titulo">Notas</h2>
+
+    <p class="subtitulo">
+        Guarde informações importantes.
+    </p>
 
     <div class="card">
 
         <input
-            id="valorFinanca"
-            type="number"
-            placeholder="Digite um valor">
+            class="input"
+            id="notaTitulo"
+            placeholder="Título da nota"
+        >
 
-        <button class="botao-principal"
-                onclick="adicionarValor()">
-            + Adicionar
+        <textarea
+            class="input"
+            id="notaTexto"
+            placeholder="Escreva sua nota..."
+        ></textarea>
+
+        <button class="btn btn-primary" onclick="adicionarNota()">
+            Salvar nota
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h3>📝 Minhas notas</h3>
+
+        <div id="listaNotas" class="lista"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FINANÇAS ================= -->
+
+<section class="screen" id="financas">
+
+    <h2 class="titulo">Finanças</h2>
+
+    <p class="subtitulo">
+        Controle entradas, gastos e saldo.
+    </p>
+
+    <div class="grid">
+
+        <div class="card">
+            <p>Entradas</p>
+            <div class="valor positivo" id="totalEntradas">
+                R$ 0,00
+            </div>
+        </div>
+
+        <div class="card">
+            <p>Gastos</p>
+            <div class="valor negativo" id="totalGastos">
+                R$ 0,00
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <p>Saldo</p>
+
+        <div class="valor" id="saldoAtual">
+            R$ 0,00
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>➕ Registrar movimentação</h3>
+
+        <select class="input" id="tipoMovimento">
+            <option value="entrada">Entrada</option>
+            <option value="gasto">Gasto</option>
+        </select>
+
+        <input
+            class="input"
+            id="movimentoDescricao"
+            placeholder="Descrição"
+        >
+
+        <input
+            class="input"
+            id="movimentoValor"
+            type="number"
+            step="0.01"
+            placeholder="Valor"
+        >
+
+        <button class="btn btn-primary" onclick="adicionarMovimento()">
+            Registrar
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>📊 Histórico</h3>
+
+        <div id="listaMovimentos" class="lista"></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= RESERVA ================= -->
+
+<section class="screen" id="reserva">
+
+    <h2 class="titulo">Reserva</h2>
+
+    <p class="subtitulo">
+        Acompanhe seu objetivo de economia.
+    </p>
+
+    <div class="card">
+
+        <p>Total reservado</p>
+
+        <div class="valor" id="totalReserva">
+            R$ 0,00
+        </div>
+
+        <hr>
+
+        <label>Meta da reserva</label>
+
+        <input
+            class="input"
+            id="metaReserva"
+            type="number"
+            step="0.01"
+            placeholder="Ex.: 5000"
+        >
+
+        <button class="btn" onclick="salvarMetaReserva()">
+            Salvar meta
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>💵 Adicionar dinheiro</h3>
+
+        <input
+            class="input"
+            id="valorReserva"
+            type="number"
+            step="0.01"
+            placeholder="Valor"
+        >
+
+        <button class="btn btn-green" onclick="adicionarReserva()">
+            Adicionar à reserva
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>📈 Progresso</h3>
+
+        <div id="progressoReserva">
+            Meta não definida.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ESTUDOS ================= -->
+
+<section class="screen" id="estudos">
+
+    <h2 class="titulo">Estudos</h2>
+
+    <p class="subtitulo">
+        Organize seus conhecimentos.
+    </p>
+
+    <div class="card">
+
+        <h3>📚 Meus módulos</h3>
+
+        <div class="lista">
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Informática</div>
+                    <div class="item-desc">Básica → intermediária → avançada</div>
+                </div>
+                <span class="badge">MÓDULO 1</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Programação</div>
+                    <div class="item-desc">Lógica, HTML, CSS e JavaScript</div>
+                </div>
+                <span class="badge">MÓDULO 2</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Tecnologia</div>
+                    <div class="item-desc">Computadores, internet e sistemas</div>
+                </div>
+                <span class="badge">MÓDULO 3</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Mecânica</div>
+                    <div class="item-desc">Carros, motos e equipamentos</div>
+                </div>
+                <span class="badge">MÓDULO 4</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Eletricista</div>
+                    <div class="item-desc">Fundamentos elétricos</div>
+                </div>
+                <span class="badge">MÓDULO 5</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Administração</div>
+                    <div class="item-desc">Organização e negócios</div>
+                </div>
+                <span class="badge">MÓDULO 6</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Educação financeira</div>
+                    <div class="item-desc">Controle, economia e investimentos</div>
+                </div>
+                <span class="badge">MÓDULO 7</span>
+            </div>
+
+            <div class="item">
+                <div class="item-info">
+                    <div class="item-title">Hábitos e rotina</div>
+                    <div class="item-desc">Organização pessoal</div>
+                </div>
+                <span class="badge">MÓDULO 8</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= GPS ================= -->
+
+<section class="screen" id="gps">
+
+    <h2 class="titulo">GPS</h2>
+
+    <p class="subtitulo">
+        Abra rapidamente serviços de navegação.
+    </p>
+
+    <div class="card">
+
+        <h3>📍 Google Maps</h3>
+
+        <input
+            class="input"
+            id="destinoMaps"
+            placeholder="Digite o destino"
+        >
+
+        <button class="btn btn-primary" onclick="abrirMaps()">
+            Abrir rota
+        </button>
+
+    </div>
+
+    <div class="card">
+
+        <h3>🚗 Waze</h3>
+
+        <input
+            class="input"
+            id="destinoWaze"
+            placeholder="Digite o destino"
+        >
+
+        <button class="btn btn-primary" onclick="abrirWaze()">
+            Abrir Waze
         </button>
 
     </div>
@@ -432,66 +949,136 @@ nav button.ativo {
 </section>
 
 
-<!-- CONFIGURAÇÕES -->
-<section id="config" class="tela">
+<!-- ================= MÚSICA ================= -->
 
-    <button class="voltar"
-            onclick="abrirTela('inicio')">
-        ← Voltar
-    </button>
+<section class="screen" id="musica">
 
-    <h1>Configurações</h1>
+    <h2 class="titulo">Música</h2>
 
     <p class="subtitulo">
-        Personalize o Nexus.
+        Acesse suas plataformas.
     </p>
 
     <div class="card">
 
-        <div class="config-item">
-            <span>🔊 Voz</span>
-            <span>Ativa</span>
-        </div>
+        <button class="btn btn-primary" onclick="abrirSite('https://open.spotify.com/')">
+            🎵 Abrir Spotify
+        </button>
 
-        <div class="config-item">
-            <span>🌐 Conexão</span>
-            <span>Online</span>
-        </div>
-
-        <div class="config-item">
-            <span>🤖 Nexus</span>
-            <span>1.0</span>
-        </div>
+        <button class="btn" onclick="abrirSite('https://www.youtube.com/')">
+            ▶️ Abrir YouTube
+        </button>
 
     </div>
 
 </section>
 
 
-<!-- MENU INFERIOR -->
-<nav>
+<!-- ================= NOTIFICAÇÕES ================= -->
 
-    <button id="navInicio"
-            class="ativo"
-            onclick="abrirTela('inicio')">
-        <span>🏠</span>
+<section class="screen" id="notificacoes">
+
+    <h2 class="titulo">Notificações</h2>
+
+    <p class="subtitulo">
+        Central de informações do Nexus.
+    </p>
+
+    <div class="card">
+
+        <h3>🔔 Status</h3>
+
+        <p>
+            O navegador não permite que esta versão web leia
+            automaticamente todas as notificações do Android ou
+            do WhatsApp.
+        </p>
+
+        <button class="btn" onclick="mostrarAlerta('As notificações completas serão adicionadas na versão Android do Nexus.')">
+            Ver informações
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONFIGURAÇÕES ================= -->
+
+<section class="screen" id="config">
+
+    <h2 class="titulo">Configurações</h2>
+
+    <p class="subtitulo">
+        Controle básico do Nexus.
+    </p>
+
+    <div class="card">
+
+        <h3>👤 Usuário</h3>
+
+        <input
+            class="input"
+            id="nomeUsuario"
+            placeholder="Seu nome"
+        >
+
+        <button class="btn btn-primary" onclick="salvarNome()">
+            Salvar nome
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>🔊 Voz</h3>
+
+        <button class="btn" onclick="testarVoz()">
+            Testar voz do Nexus
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>🗑️ Dados</h3>
+
+        <button class="btn btn-danger" onclick="limparDados()">
+            Apagar dados do Nexus
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= NAVEGAÇÃO ================= -->
+
+<nav class="nav">
+
+    <button data-tela="inicio" onclick="abrirTela('inicio')">
+        <span>⌂</span>
         Início
     </button>
 
-    <button id="navNexus"
-            onclick="abrirTela('nexus')">
-        <span>🤖</span>
-        Nexus
+    <button data-tela="rotina" onclick="abrirTela('rotina')">
+        <span>⏰</span>
+        Rotina
     </button>
 
-    <button id="navNotas"
-            onclick="abrirTela('notas')">
+    <button data-tela="notas" onclick="abrirTela('notas')">
         <span>📝</span>
         Notas
     </button>
 
-    <button id="navConfig"
-            onclick="abrirTela('config')">
+    <button data-tela="financas" onclick="abrirTela('financas')">
+        <span>💰</span>
+        Finanças
+    </button>
+
+    <button data-tela="config" onclick="abrirTela('config')">
         <span>⚙️</span>
         Config.
     </button>
@@ -501,220 +1088,26 @@ nav button.ativo {
 </div>
 
 
+<!-- ================= ALERTA ================= -->
+
+<div class="alerta" id="alerta">
+    <strong>NEXUS</strong>
+    <div id="textoAlerta" style="margin-top:5px;"></div>
+</div>
+
+
 <script>
 
-/* =========================
-   TROCAR DE TELA
-========================= */
+/* =========================================================
+   NEXUS 1.0
+   SISTEMA PRINCIPAL
+========================================================= */
 
-function abrirTela(nome) {
 
-    const telas = document.querySelectorAll(".tela");
+/* ---------- DADOS ---------- */
 
-    telas.forEach(function(tela) {
-        tela.classList.remove("ativa");
-    });
+let tarefas =
+    JSON.parse(localStorage.getItem("nexus_tarefas")) || [];
 
-    const telaEscolhida = document.getElementById(nome);
-
-    if (telaEscolhida) {
-        telaEscolhida.classList.add("ativa");
-    }
-
-    // Atualiza menu inferior
-    document.querySelectorAll("nav button").forEach(function(botao) {
-        botao.classList.remove("ativo");
-    });
-
-    if (nome === "inicio") {
-        document.getElementById("navInicio").classList.add("ativo");
-    }
-
-    if (nome === "nexus") {
-        document.getElementById("navNexus").classList.add("ativo");
-    }
-
-    if (nome === "notas") {
-        document.getElementById("navNotas").classList.add("ativo");
-    }
-
-    if (nome === "config") {
-        document.getElementById("navConfig").classList.add("ativo");
-    }
-
-    window.scrollTo(0, 0);
-}
-
-
-/* =========================
-   COMANDO DE VOZ
-========================= */
-
-function iniciarVoz() {
-
-    const resultado =
-        document.getElementById("resultadoVoz");
-
-    const Reconhecimento =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-    if (!Reconhecimento) {
-
-        resultado.innerText =
-            "O reconhecimento de voz não é compatível com este navegador.";
-
-        return;
-    }
-
-    const reconhecimento = new Reconhecimento();
-
-    reconhecimento.lang = "pt-BR";
-
-    reconhecimento.interimResults = false;
-
-    resultado.innerText =
-        "🎙️ Estou ouvindo...";
-
-    reconhecimento.start();
-
-    reconhecimento.onresult = function(event) {
-
-        const texto =
-            event.results[0][0].transcript;
-
-        resultado.innerText =
-            "Você disse: " + texto;
-
-        processarComando(texto);
-    };
-
-    reconhecimento.onerror = function() {
-
-        resultado.innerText =
-            "Não consegui entender. Tente novamente.";
-    };
-}
-
-
-/* =========================
-   COMANDOS
-========================= */
-
-function processarComando(texto) {
-
-    texto = texto.toLowerCase();
-
-    if (texto.includes("rotina")) {
-
-        abrirTela("rotina");
-
-        return;
-    }
-
-    if (texto.includes("nota")) {
-
-        abrirTela("notas");
-
-        return;
-    }
-
-    if (texto.includes("finança") ||
-        texto.includes("finanças")) {
-
-        abrirTela("financas");
-
-        return;
-    }
-
-    if (texto.includes("configuração") ||
-        texto.includes("configurações")) {
-
-        abrirTela("config");
-
-        return;
-    }
-
-    if (texto.includes("início") ||
-        texto.includes("inicio")) {
-
-        abrirTela("inicio");
-
-        return;
-    }
-}
-
-
-/* =========================
-   NOTAS
-========================= */
-
-function salvarNota() {
-
-    const texto =
-        document.getElementById("campoNotas").value;
-
-    localStorage.setItem("nexusNota", texto);
-
-    alert("Nota salva com sucesso! 📝");
-}
-
-const notaSalva =
-    localStorage.getItem("nexusNota");
-
-if (notaSalva) {
-
-    document.getElementById("campoNotas").value =
-        notaSalva;
-}
-
-
-/* =========================
-   FINANÇAS
-========================= */
-
-let saldoAtual =
-    Number(localStorage.getItem("nexusSaldo")) || 0;
-
-function atualizarSaldo() {
-
-    document.getElementById("saldo").innerText =
-        saldoAtual.toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        });
-}
-
-function adicionarValor() {
-
-    const campo =
-        document.getElementById("valorFinanca");
-
-    const valor =
-        Number(campo.value);
-
-    if (!valor || valor <= 0) {
-
-        alert("Digite um valor válido.");
-
-        return;
-    }
-
-    saldoAtual += valor;
-
-    localStorage.setItem(
-        "nexusSaldo",
-        saldoAtual
-    );
-
-    campo.value = "";
-
-    atualizarSaldo();
-}
-
-atualizarSaldo();
-
-</script>
-
-</body>
-</html>
+let notas =
+    JSON.parse(localStorag
