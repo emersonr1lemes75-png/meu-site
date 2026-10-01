@@ -1,409 +1,934 @@
-<!DOCTYPE html>
+
+
+   <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NEXUS 1.0</title>
+<title>NEXUS 1.0 — Seu assistente. Sua rotina. Seu controle.</title>
+
+<meta name="description"
+content="NEXUS 1.0 — Assistente pessoal inteligente.">
 
 <style>
+
+/* =========================================================
+   CONFIGURAÇÃO GERAL
+========================================================= */
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#050b14;
-    color:#fff;
     min-height:100vh;
+    background:#03060b;
+    color:#ffffff;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-header{
-    padding:20px;
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+
+/* =========================================================
+   APLICATIVO
+========================================================= */
+
+#app{
+    width:100%;
+    max-width:520px;
+    min-height:100vh;
+    margin:auto;
+    position:relative;
+    overflow-x:hidden;
+    background:
+        radial-gradient(circle at 50% 0%,
+        rgba(0,145,255,.16),
+        transparent 35%),
+        linear-gradient(180deg,#07111e 0%,#02050a 100%);
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.topo{
+    padding:22px 18px 12px;
     text-align:center;
-    background:#081525;
-    border-bottom:1px solid #12365c;
-    position:sticky;
-    top:0;
-    z-index:10;
 }
 
 .logo{
-    font-size:30px;
+    color:#27adff;
+    font-size:31px;
     font-weight:bold;
-    letter-spacing:5px;
-    color:#28a9ff;
+    letter-spacing:6px;
+    text-shadow:
+        0 0 8px rgba(0,150,255,.8),
+        0 0 25px rgba(0,120,255,.35);
 }
 
 .subtitulo{
+    color:#8397aa;
+    font-size:12px;
     margin-top:5px;
-    color:#8aa6bf;
-    font-size:13px;
 }
 
-main{
-    padding:20px;
-    padding-bottom:100px;
-}
+
+/* =========================================================
+   TELAS
+========================================================= */
 
 .tela{
     display:none;
+    min-height:calc(100vh - 90px);
+    padding:18px;
+    padding-bottom:110px;
+    animation:entrada .25s ease;
 }
 
 .tela.ativa{
     display:block;
 }
 
-.card{
-    background:#0b1929;
-    border:1px solid #12365c;
-    border-radius:18px;
-    padding:20px;
-    margin-bottom:16px;
+@keyframes entrada{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-h1{
-    font-size:25px;
-    margin-bottom:10px;
+
+/* =========================================================
+   CARTÕES
+========================================================= */
+
+.cartao{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,31,48,.95),
+            rgba(5,13,23,.95)
+        );
+
+    border:1px solid rgba(40,170,255,.22);
+
+    border-radius:20px;
+
+    padding:18px;
+
+    margin-bottom:15px;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.25),
+        inset 0 0 20px rgba(0,130,255,.025);
 }
 
-h2{
-    font-size:20px;
-    margin-bottom:10px;
-    color:#28a9ff;
+.titulo{
+    font-size:23px;
+    margin-bottom:7px;
 }
 
-p{
-    color:#b7c7d6;
+.titulo-azul{
+    color:#35b7ff;
+}
+
+.descricao{
+    color:#9cadbd;
     line-height:1.5;
+    font-size:14px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
-    margin-top:15px;
-}
 
-button{
-    border:none;
-    cursor:pointer;
-}
+/* =========================================================
+   RELÓGIO
+========================================================= */
 
-.btn{
-    width:100%;
-    padding:14px;
-    border-radius:12px;
-    background:#102a45;
-    color:#fff;
-    border:1px solid #1b527f;
-    font-size:15px;
-    margin-top:8px;
-}
-
-.btn-principal{
-    background:#087dcc;
-}
-
-input,
-textarea{
-    width:100%;
-    padding:13px;
-    margin-top:8px;
-    margin-bottom:10px;
-    border-radius:10px;
-    border:1px solid #1b527f;
-    background:#07111d;
-    color:#fff;
-    outline:none;
-}
-
-textarea{
-    min-height:120px;
-    resize:vertical;
-}
-
-.lista{
-    margin-top:12px;
-}
-
-.item{
-    background:#071321;
-    border:1px solid #173653;
-    border-radius:10px;
-    padding:12px;
-    margin-top:8px;
-}
-
-nav{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    background:#071321;
-    border-top:1px solid #12365c;
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    z-index:20;
-}
-
-.nav-btn{
-    background:transparent;
-    color:#8ca6bd;
-    padding:13px 4px;
-    font-size:11px;
-}
-
-.nav-btn.ativo{
-    color:#28a9ff;
-}
-
-.status{
+.relogio{
     text-align:center;
-    margin-top:12px;
-    color:#6f91aa;
+    font-size:43px;
+    font-weight:bold;
+    color:#35b8ff;
+    margin:18px 0 4px;
+    text-shadow:0 0 18px rgba(0,160,255,.4);
+}
+
+.data{
+    text-align:center;
+    color:#71879b;
     font-size:13px;
 }
 
-.numero{
-    font-size:30px;
-    color:#28a9ff;
-    font-weight:bold;
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status{
+    text-align:center;
+    color:#5be0a3;
+    font-size:13px;
+    margin:14px 0;
 }
 
-@media(max-width:400px){
-    .grid{
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.botao-principal{
+    width:100%;
+    border:0;
+    border-radius:17px;
+    padding:17px;
+    margin-top:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087bdc,
+            #16b7ff
+        );
+
+    color:#ffffff;
+    font-weight:bold;
+
+    box-shadow:
+        0 0 22px rgba(0,150,255,.22);
+}
+
+.botao{
+    width:100%;
+    border:1px solid rgba(45,170,255,.25);
+    border-radius:15px;
+    padding:14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #10273c,
+            #07111d
+        );
+
+    color:#ffffff;
+}
+
+.botao-secundario{
+    width:100%;
+    border:1px solid #203b52;
+    border-radius:14px;
+    padding:13px;
+
+    background:#0b141f;
+    color:#a8d8ff;
+
+    margin-top:10px;
+}
+
+.botao-perigo{
+    width:100%;
+    border:1px solid rgba(255,80,80,.3);
+    border-radius:14px;
+    padding:13px;
+
+    background:#241012;
+    color:#ff9b9b;
+
+    margin-top:10px;
+}
+
+
+/* =========================================================
+   GRADE DE BOTÕES
+========================================================= */
+
+.grade{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:11px;
+}
+
+.botao-funcao{
+    min-height:82px;
+
+    border:1px solid rgba(45,170,255,.25);
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #10273c,
+            #07111d
+        );
+
+    color:#ffffff;
+
+    padding:12px 8px;
+
+    transition:.2s;
+}
+
+.botao-funcao:hover{
+    border-color:#27aaff;
+
+    box-shadow:
+        0 0 17px rgba(0,150,255,.2);
+
+    transform:translateY(-2px);
+}
+
+.icone{
+    display:block;
+    font-size:26px;
+    margin-bottom:7px;
+}
+
+.nome-funcao{
+    font-size:13px;
+}
+
+
+/* =========================================================
+   ÁREA DE RESPOSTA
+========================================================= */
+
+.resposta{
+    min-height:65px;
+
+    margin-top:12px;
+
+    padding:14px;
+
+    border-radius:14px;
+
+    background:#06111c;
+
+    border:1px solid #17354d;
+
+    color:#c9edff;
+
+    line-height:1.5;
+}
+
+
+/* =========================================================
+   LISTAS
+========================================================= */
+
+.lista{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.item{
+    padding:14px;
+
+    border-radius:13px;
+
+    background:#08131f;
+
+    border:1px solid #173047;
+
+    color:#b8c9d8;
+
+    line-height:1.5;
+}
+
+.item strong{
+    color:#ffffff;
+}
+
+.item-azul{
+    border-left:3px solid #27adff;
+}
+
+.item-verde{
+    border-left:3px solid #49d99a;
+}
+
+.item-amarelo{
+    border-left:3px solid #ffd15c;
+}
+
+
+/* =========================================================
+   FORMULÁRIOS
+========================================================= */
+
+.campo{
+    width:100%;
+
+    padding:14px;
+
+    margin-top:10px;
+
+    background:#03080e;
+
+    color:#ffffff;
+
+    border:1px solid #21405a;
+
+    border-radius:12px;
+
+    outline:none;
+}
+
+.campo:focus{
+    border-color:#27aaff;
+
+    box-shadow:
+        0 0 10px rgba(0,150,255,.12);
+}
+
+textarea.campo{
+    min-height:130px;
+    resize:vertical;
+}
+
+
+/* =========================================================
+   SALDO
+========================================================= */
+
+.saldo{
+    text-align:center;
+
+    font-size:30px;
+
+    color:#55dda0;
+
+    margin:16px 0;
+}
+
+.valor{
+    font-size:21px;
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO INFERIOR
+========================================================= */
+
+.navegacao{
+    position:fixed;
+
+    left:50%;
+
+    bottom:0;
+
+    transform:translateX(-50%);
+
+    width:100%;
+
+    max-width:520px;
+
+    z-index:1000;
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    padding:8px 5px 9px;
+
+    background:
+        rgba(3,8,14,.97);
+
+    backdrop-filter:blur(12px);
+
+    border-top:1px solid #183149;
+}
+
+.nav-botao{
+    background:transparent;
+
+    border:0;
+
+    color:#657b90;
+
+    font-size:10px;
+
+    padding:5px 2px;
+}
+
+.nav-botao.ativo{
+    color:#2eb4ff;
+}
+
+.nav-icone{
+    display:block;
+
+    font-size:19px;
+
+    margin-bottom:3px;
+}
+
+
+/* =========================================================
+   AVISOS
+========================================================= */
+
+.aviso{
+    padding:13px;
+
+    border-radius:12px;
+
+    background:#18150a;
+
+    border:1px solid #51451b;
+
+    color:#e7cf71;
+
+    font-size:13px;
+
+    line-height:1.5;
+
+    margin-top:12px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media(max-width:370px){
+
+    .grade{
         grid-template-columns:1fr;
     }
+
+    .logo{
+        font-size:27px;
+    }
+
+    .relogio{
+        font-size:36px;
+    }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<header>
-    <div class="logo">NEXUS</div>
+<div id="app">
+
+
+<!-- =====================================================
+     CABEÇALHO
+===================================================== -->
+
+<header class="topo">
+
+    <div class="logo">
+        NEXUS
+    </div>
+
     <div class="subtitulo">
         Seu assistente. Sua rotina. Seu controle.
     </div>
+
 </header>
 
-<main>
 
-<section id="inicio" class="tela ativa">
+<!-- =====================================================
+     TELA: INÍCIO
+===================================================== -->
 
-    <div class="card">
-        <h1>Olá, Emerson.</h1>
+<section
+id="tela-inicio"
+class="tela ativa">
 
-        <p>
-            O Nexus está pronto para começar.
-        </p>
+    <div class="cartao">
 
-        <button
-            class="btn btn-principal"
-            type="button"
-            onclick="falarNexus()">
-            🎙️ Ativar comando de voz
-        </button>
-
-        <div id="statusVoz" class="status">
-            Aguardando comando...
+        <div class="titulo">
+            Olá. Eu sou o <span class="titulo-azul">NEXUS</span>.
         </div>
-    </div>
 
-    <div class="grid">
+        <div class="descricao">
+            Seu assistente pessoal inteligente.
+        </div>
 
-        <button
-            class="btn"
-            type="button"
-            onclick="abrirTela('rotina')">
-            ⏰ Rotina
-        </button>
-
-        <button
-            class="btn"
-            type="button"
-            onclick="abrirTela('notas')">
-            📝 Notas
-        </button>
-
-        <button
-            class="btn"
-            type="button"
-            onclick="abrirTela('financas')">
-            💰 Finanças
-        </button>
-
-        <button
-            class="btn"
-            type="button"
-            onclick="abrirTela('estudos')">
-            📚 Estudos
-        </button>
-
-        <button
-            class="btn"
-            type="button"
-            onclick="abrirTela('gps')">
-            📍 GPS
-        </button>
-
-        <button
-            class="btn"
-            type="button"
-            onclick="abrirTela('musica')">
-            🎵 Música
-        </button>
-
-    </div>
-
-</section>
-
-<section id="rotina" class="tela">
-
-    <div class="card">
-
-        <h1>⏰ Minha Rotina</h1>
-
-        <p>
-            Organize suas tarefas do dia.
-        </p>
-
-        <input
-            id="tarefaInput"
-            type="text"
-            placeholder="Digite uma tarefa">
-
-        <button
-            class="btn btn-principal"
-            type="button"
-            onclick="adicionarTarefa()">
-            + Adicionar tarefa
-        </button>
 
         <div
-            id="listaTarefas"
-            class="lista">
+        id="relogio"
+        class="relogio">
+            00:00:00
+        </div>
+
+        <div
+        id="dataAtual"
+        class="data">
+            Carregando...
+        </div>
+
+
+        <div
+        id="statusSistema"
+        class="status">
+            ● Sistema pronto
+        </div>
+
+
+        <button
+        class="botao-principal"
+        onclick="NexusOuvir()">
+
+            🎙️ FALAR COM NEXUS
+
+        </button>
+
+
+        <div
+        id="respostaNexus"
+        class="resposta">
+
+            Estou pronto. Escolha uma função
+            ou fale comigo.
+
+        </div>
+
+    </div>
+
+
+    <div class="cartao">
+
+        <div class="titulo">
+            Funções
+        </div>
+
+        <br>
+
+        <div class="grade">
+
+
+            <button
+            class="botao-funcao"
+            onclick="NexusAbrirTela('rotina')">
+
+                <span class="icone">⏰</span>
+
+                <span class="nome-funcao">
+                    Rotina
+                </span>
+
+            </button>
+
+
+            <button
+            class="botao-funcao"
+            onclick="NexusAbrirTela('notificacoes')">
+
+                <span class="icone">🔔</span>
+
+                <span class="nome-funcao">
+                    Notificações
+                </span>
+
+            </button>
+
+
+            <button
+            class="botao-funcao"
+            onclick="NexusAbrirTela('notas')">
+
+                <span class="icone">📝</span>
+
+                <span class="nome-funcao">
+                    Notas
+                </span>
+
+            </button>
+
+
+            <button
+            class="botao-funcao"
+            onclick="NexusAbrirTela('financas')">
+
+                <span class="icone">💰</span>
+
+                <span class="nome-funcao">
+                    Finanças
+                </span>
+
+            </button>
+
+
+            <button
+            class="botao-funcao"
+            onclick="NexusAbrirTela('estudos')">
+
+                <span class="icone">📚</span>
+
+                <span class="nome-funcao">
+                    Estudos
+                </span>
+
+            </button>
+
+
+            <button
+            class="botao-funcao"
+            onclick="NexusAbrirTela('navegacao')">
+
+                <span class="icone">🗺️</span>
+
+                <span class="nome-funcao">
+                    Navegação
+                </span>
+
+            </button>
+
+
+            <button
+            class="botao-funcao"
+            onclick="NexusAbrirTela('musica')">
+
+                <span class="icone">🎵</span>
+
+                <span class="nome-funcao">
+                    Música
+                </span>
+
+            </button>
+
+
+            <button
+            class="botao-funcao"
+            onclick="NexusAbrirTela('calculadora')">
+
+                <span class="icone">🧮</span>
+
+                <span class="nome-funcao">
+                    Calculadora
+                </span>
+
+            </button>
+
+
+            <button
+            class="botao-funcao"
+            onclick="NexusAbrirTela('configuracoes')">
+
+                <span class="icone">⚙️</span>
+
+                <span class="nome-funcao">
+                    Configurações
+                </span>
+
+            </button>
+
+
         </div>
 
     </div>
 
 </section>
 
-<section id="notas" class="tela">
 
-    <div class="card">
+<!-- =====================================================
+     TELA: ROTINA
+===================================================== -->
 
-        <h1>📝 Notas</h1>
+<section
+id="tela-rotina"
+class="tela">
 
-        <p>
-            Escreva e salve suas anotações.
-        </p>
+    <div class="cartao">
+
+        <div class="titulo">
+            ⏰ Minha rotina
+        </div>
+
+        <div class="descricao">
+            Organização diária do NEXUS.
+        </div>
+
+    </div>
+
+
+    <div class="lista">
+
+
+        <div class="item item-azul">
+
+            <strong>05:00</strong><br>
+
+            Início da rotina.
+
+        </div>
+
+
+        <div class="item item-azul">
+
+            <strong>06:40</strong><br>
+
+            Chegada ao trabalho.
+
+        </div>
+
+
+        <div class="item item-azul">
+
+            <strong>07:00 — 17:00</strong><br>
+
+            Trabalho de segunda a quinta.
+
+        </div>
+
+
+        <div class="item item-azul">
+
+            <strong>Sexta-feira</strong><br>
+
+            Trabalho até 16:00.
+
+        </div>
+
+
+        <div class="item item-azul">
+
+            <strong>Sábado</strong><br>
+
+            Trabalho até 11:00.
+
+        </div>
+
+
+        <div class="item item-verde">
+
+            <strong>Após o trabalho</strong><br>
+
+            Projetos pessoais, estudos e NEXUS.
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TELA: NOTIFICAÇÕES
+===================================================== -->
+
+<section
+id="tela-notificacoes"
+class="tela">
+
+    <div class="cartao">
+
+        <div class="titulo">
+            🔔 Notificações
+        </div>
+
+        <div class="descricao">
+            Central de notificações do NEXUS.
+        </div>
+
+    </div>
+
+
+    <div class="item">
+
+        <strong>0 notificações disponíveis</strong>
+
+        <br>
+
+        O navegador não possui acesso às
+        notificações internas do Android.
+
+    </div>
+
+
+    <div class="aviso">
+
+        Para ler notificações reais do celular,
+        o NEXUS precisará de uma versão
+        Android com permissão específica
+        para notificações.
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TELA: NOTAS
+===================================================== -->
+
+<section
+id="tela-notas"
+class="tela">
+
+    <div class="cartao">
+
+        <div class="titulo">
+            📝 Bloco de notas
+        </div>
+
+        <div class="descricao">
+            Suas notas ficam salvas neste aparelho
+            através do armazenamento local.
+        </div>
+
 
         <textarea
-            id="notaInput"
-            placeholder="Digite sua nota..."></textarea>
+        id="campoNota"
+        class="campo"
+        placeholder="Escreva sua nota aqui..."></textarea>
+
 
         <button
-            class="btn btn-principal"
-            type="button"
-            onclick="salvarNota()">
-            💾 Salvar nota
+        class="botao-principal"
+        onclick="NexusSalvarNota()">
+
+            💾 SALVAR NOTA
+
         </button>
+
+
+        <button
+        class="botao-secundario"
+        onclick="NexusApagarNota()">
+
+            🗑️ Apagar nota
+
+        </button>
+
 
         <div
-            id="listaNotas"
-            class="lista">
-        </div>
+        id="resultadoNota"
+        class="resposta">
 
-    </div>
-
-</section>
-
-<section id="financas" class="tela">
-
-    <div class="card">
-
-        <h1>💰 Finanças</h1>
-
-        <p>
-            Controle simples do seu dinheiro.
-        </p>
-
-        <input
-            id="valorEntrada"
-            type="number"
-            step="0.01"
-            placeholder="Valor da entrada">
-
-        <button
-            class="btn btn-principal"
-            type="button"
-            onclick="registrarEntrada()">
-            + Registrar entrada
-        </button>
-
-        <input
-            id="valorSaida"
-            type="number"
-            step="0.01"
-            placeholder="Valor da saída">
-
-        <button
-            class="btn"
-            type="button"
-            onclick="registrarSaida()">
-            - Registrar saída
-        </button>
-
-        <div class="card">
-
-            <p>Saldo atual</p>
-
-            <div
-                id="saldo"
-                class="numero">
-                R$ 0,00
-            </div>
-
-        </div>
-
-    </div>
-
-</section><section id="reserva" class="tela">
-
-    <div class="card">
-
-        <h1>🏦 Reserva</h1>
-
-        <p>
-            Controle o dinheiro separado para seus objetivos.
-        </p>
-
-        <input
-            id="valorReserva"
-            type="number"
-            step="0.01"
-            placeholder="Valor para reservar">
-
-        <button
-            class="btn btn-principal"
-            type="button"
-            onclick="adicionarReserva()">
-            Guardar dinheiro
-        </button>
-
-        <div class="card">
-
-            <p>Total reservado</p>
-
-            <div
-                id="totalReserva"
-                class="numero">
-                R$ 0,00
-            </div>
+            Nenhuma alteração.
 
         </div>
 
@@ -412,124 +937,299 @@ nav{
 </section>
 
 
-<section id="estudos" class="tela">
+<!-- =====================================================
+     TELA: FINANÇAS
+===================================================== -->
 
-    <div class="card">
+<section
+id="tela-financas"
+class="tela">
 
-        <h1>📚 Estudos</h1>
+    <div class="cartao">
 
-        <p>
-            Seu espaço para aprender.
-        </p>
+        <div class="titulo">
+            💰 Finanças
+        </div>
 
-        <button
-            class="btn"
-            type="button"
-            onclick="mostrarMensagem('Informática')">
-            💻 Informática
-        </button>
+        <div class="descricao">
+            Controle simples de entradas e gastos.
+        </div>
 
-        <button
-            class="btn"
-            type="button"
-            onclick="mostrarMensagem('Programação')">
-            👨‍💻 Programação
-        </button>
-
-        <button
-            class="btn"
-            type="button"
-            onclick="mostrarMensagem('Tecnologia')">
-            ⚙️ Tecnologia
-        </button>
-
-        <button
-            class="btn"
-            type="button"
-            onclick="mostrarMensagem('Educação financeira')">
-            💰 Educação financeira
-        </button>
 
         <div
-            id="mensagemEstudo"
-            class="status">
+        id="saldo"
+        class="saldo">
+
+            R$ 0,00
+
+        </div>
+
+
+        <input
+        id="valorFinanceiro"
+        class="campo"
+        type="number"
+        step="0.01"
+        placeholder="Digite o valor">
+
+
+        <button
+        class="botao-principal"
+        onclick="NexusAdicionarEntrada()">
+
+            ➕ Registrar entrada
+
+        </button>
+
+
+        <button
+        class="botao-secundario"
+        onclick="NexusAdicionarGasto()">
+
+            ➖ Registrar gasto
+
+        </button>
+
+
+        <button
+        class="botao-perigo"
+        onclick="NexusLimparFinancas()">
+
+            🗑️ Limpar registros
+
+        </button>
+
+    </div>
+
+
+    <div
+    id="resumoFinanceiro"
+    class="cartao">
+
+        Entradas: R$ 0,00
+        <br><br>
+        Gastos: R$ 0,00
+        <br><br>
+        Saldo: R$ 0,00
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TELA: ESTUDOS
+===================================================== -->
+
+<section
+id="tela-estudos"
+class="tela">
+
+    <div class="cartao">
+
+        <div class="titulo">
+            📚 Estudos
+        </div>
+
+        <div class="descricao">
+            Área de aprendizado do NEXUS.
         </div>
 
     </div>
 
-</section>
+
+    <div class="lista">
 
 
-<section id="gps" class="tela">
+        <div class="item item-azul">
+            💻 <strong>Informática</strong>
+            <br>
+            Do básico ao avançado.
+        </div>
 
-    <div class="card">
 
-        <h1>📍 GPS</h1>
+        <div class="item item-azul">
+            👨‍💻 <strong>Programação</strong>
+            <br>
+            Aprendizado passo a passo.
+        </div>
 
-        <p>
-            Abra rapidamente serviços de mapas.
-        </p>
 
-        <button
-            class="btn btn-principal"
-            type="button"
-            onclick="abrirLink('https://www.google.com/maps')">
-            🗺️ Google Maps
-        </button>
+        <div class="item item-azul">
+            🖥️ <strong>Tecnologia</strong>
+            <br>
+            Computadores, internet e sistemas.
+        </div>
 
-        <button
-            class="btn"
-            type="button"
-            onclick="abrirLink('https://www.waze.com/live-map')">
-            🚗 Waze
-        </button>
+
+        <div class="item item-azul">
+            💰 <strong>Educação financeira</strong>
+            <br>
+            Organização e controle do dinheiro.
+        </div>
+
+
+        <div class="item item-azul">
+            🔧 <strong>Mecânica</strong>
+            <br>
+            Carros, motos e equipamentos.
+        </div>
+
+
+        <div class="item item-azul">
+            ⚡ <strong>Eletricista</strong>
+            <br>
+            Conceitos e aprendizado.
+        </div>
+
 
     </div>
 
 </section>
 
 
-<section id="musica" class="tela">
+<!-- =====================================================
+     TELA: NAVEGAÇÃO
+===================================================== -->
 
-    <div class="card">
+<section
+id="tela-navegacao"
+class="tela">
 
-        <h1>🎵 Música</h1>
+    <div class="cartao">
 
-        <p>
-            Abra seus serviços de música.
-        </p>
+        <div class="titulo">
+            🗺️ Navegação
+        </div>
+
+        <div class="descricao">
+            Digite um destino para abrir o mapa.
+        </div>
+
+
+        <input
+        id="destino"
+        class="campo"
+        type="text"
+        placeholder="Digite o destino">
+
 
         <button
-            class="btn btn-principal"
-            type="button"
-            onclick="abrirLink('https://open.spotify.com/')">
-            🎧 Spotify
+        class="botao-principal"
+        onclick="NexusAbrirMapa()">
+
+            🗺️ ABRIR MAPA
+
         </button>
 
-        <button
-            class="btn"
-            type="button"
-            onclick="abrirLink('https://www.youtube.com/')">
-            ▶️ YouTube
-        </button>
+    </div>
+
+
+    <div class="aviso">
+
+        O NEXUS pode abrir o mapa pelo navegador.
+        O controle completo do Waze será uma etapa
+        da versão Android.
 
     </div>
 
 </section>
 
 
-<section id="notificacoes" class="tela">
+<!-- =====================================================
+     TELA: MÚSICA
+===================================================== -->
 
-    <div class="card">
+<section
+id="tela-musica"
+class="tela">
 
-        <h1>🔔 Notificações</h1>
+    <div class="cartao">
 
-        <p>
-            Área reservada para o sistema de notificações do Nexus.
-        </p>
+        <div class="titulo">
+            🎵 Música
+        </div>
+
+        <div class="descricao">
+            Acesse seus serviços de música.
+        </div>
+
+
+        <button
+        class="botao-principal"
+        onclick="NexusAbrirMusica()">
+
+            ▶️ ABRIR YOUTUBE MUSIC
+
+        </button>
+
+    </div>
+
+
+    <div class="lista">
+
 
         <div class="item">
-            Nenhuma notificação disponível no navegador.
+            🎧 Eletrônica
+        </div>
+
+
+        <div class="item">
+            🎸 Rock
+        </div>
+
+
+        <div class="item">
+            ⚡ Eletrônico + anime
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TELA: CALCULADORA
+===================================================== -->
+
+<section
+id="tela-calculadora"
+class="tela">
+
+    <div class="cartao">
+
+        <div class="titulo">
+            🧮 Calculadora
+        </div>
+
+        <div class="descricao">
+            Faça contas simples diretamente no NEXUS.
+        </div>
+
+
+        <input
+        id="campoCalculo"
+        class="campo"
+        type="text"
+        placeholder="Exemplo: 100 + 50 * 2">
+
+
+        <button
+        class="botao-principal"
+        onclick="NexusCalcular()">
+
+            CALCULAR
+
+        </button>
+
+
+        <div
+        id="resultadoCalculo"
+        class="resposta">
+
+            Resultado aparecerá aqui.
+
         </div>
 
     </div>
@@ -537,256 +1237,549 @@ nav{
 </section>
 
 
-<section id="config" class="tela">
+<!-- =====================================================
+     TELA: CONFIGURAÇÕES
+===================================================== -->
 
-    <div class="card">
+<section
+id="tela-configuracoes"
+class="tela">
 
-        <h1>⚙️ Configurações</h1>
+    <div class="cartao">
 
-        <button
-            class="btn"
-            type="button"
-            onclick="testarVoz()">
-            🔊 Testar voz do Nexus
-        </button>
+        <div class="titulo">
+            ⚙️ Configurações
+        </div>
 
-        <button
-            class="btn"
-            type="button"
-            onclick="limparDados()">
-            🗑️ Limpar dados salvos
-        </button>
+        <div class="descricao">
+            Personalização do NEXUS.
+        </div>
 
     </div>
 
+
+    <div class="lista">
+
+
+        <div class="item item-verde">
+
+            <strong>🎙️ Comando de voz</strong>
+
+            <br>
+
+            Reconhecimento de voz do navegador.
+
+        </div>
+
+
+        <div class="item item-verde">
+
+            <strong>🔊 Voz</strong>
+
+            <br>
+
+            Resposta falada em português.
+
+        </div>
+
+
+        <div class="item item-verde">
+
+            <strong>💾 Armazenamento</strong>
+
+            <br>
+
+            Notas e dados podem ser salvos
+            localmente neste aparelho.
+
+        </div>
+
+
+        <div class="item item-amarelo">
+
+            <strong>🌐 Modo on-line</strong>
+
+            <br>
+
+            Algumas funções dependem da internet.
+
+        </div>
+
+
+        <div class="item item-amarelo">
+
+            <strong>📱 Aplicativo Android</strong>
+
+            <br>
+
+            Recursos avançados serão adicionados
+            na versão Android.
+
+        </div>
+
+
+    </div>
+
+
+    <button
+    class="botao-perigo"
+    onclick="NexusApagarDados()">
+
+        🗑️ APAGAR DADOS LOCAIS
+
+    </button>
+
 </section>
 
-</main>
 
+<!-- =====================================================
+     NAVEGAÇÃO INFERIOR
+===================================================== -->
 
-<nav>
+<nav class="navegacao">
+
 
     <button
-        class="nav-btn ativo"
-        data-tela="inicio"
-        type="button"
-        onclick="abrirTela('inicio')">
-        🏠<br>Início
+    class="nav-botao ativo"
+    data-tela="inicio"
+    onclick="NexusAbrirTela('inicio')">
+
+        <span class="nav-icone">🏠</span>
+
+        Início
+
     </button>
+
 
     <button
-        class="nav-btn"
-        data-tela="rotina"
-        type="button"
-        onclick="abrirTela('rotina')">
-        ⏰<br>Rotina
+    class="nav-botao"
+    data-tela="rotina"
+    onclick="NexusAbrirTela('rotina')">
+
+        <span class="nav-icone">⏰</span>
+
+        Rotina
+
     </button>
+
 
     <button
-        class="nav-btn"
-        data-tela="notas"
-        type="button"
-        onclick="abrirTela('notas')">
-        📝<br>Notas
+    class="nav-botao"
+    data-tela="notas"
+    onclick="NexusAbrirTela('notas')">
+
+        <span class="nav-icone">📝</span>
+
+        Notas
+
     </button>
+
 
     <button
-        class="nav-btn"
-        data-tela="financas"
-        type="button"
-        onclick="abrirTela('financas')">
-        💰<br>Finanças
+    class="nav-botao"
+    data-tela="financas"
+    onclick="NexusAbrirTela('financas')">
+
+        <span class="nav-icone">💰</span>
+
+        Finanças
+
     </button>
+
 
     <button
-        class="nav-btn"
-        data-tela="config"
-        type="button"
-        onclick="abrirTela('config')">
-        ⚙️<br>Mais
+    class="nav-botao"
+    data-tela="configuracoes"
+    onclick="NexusAbrirTela('configuracoes')">
+
+        <span class="nav-icone">⚙️</span>
+
+        Mais
+
     </button>
 
-</nav><script>
 
-function abrirTela(id){
+</nav>
 
-    const telas = document.querySelectorAll(".tela");
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   NEXUS 1.0
+   SISTEMA PRINCIPAL
+========================================================= */
+
+
+/* =========================================================
+   TROCA DE TELAS
+========================================================= */
+
+function NexusAbrirTela(nome){
+
+    const telas =
+        document.querySelectorAll(".tela");
 
     telas.forEach(function(tela){
+
         tela.classList.remove("ativa");
+
     });
 
-    const tela = document.getElementById(id);
 
-    if(!tela){
+    const escolhida =
+        document.getElementById(
+            "tela-" + nome
+        );
+
+
+    if(!escolhida){
+
+        console.log(
+            "Tela não encontrada:",
+            nome
+        );
+
         return;
+
     }
 
-    tela.classList.add("ativa");
 
-    const botoes = document.querySelectorAll(".nav-btn");
+    escolhida.classList.add("ativa");
+
+
+    const botoes =
+        document.querySelectorAll(
+            ".nav-botao"
+        );
+
 
     botoes.forEach(function(botao){
+
         botao.classList.remove("ativo");
 
-        if(botao.getAttribute("data-tela") === id){
+        if(
+            botao.getAttribute("data-tela")
+            === nome
+        ){
+
             botao.classList.add("ativo");
+
         }
+
     });
 
-    window.scrollTo(0,0);
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
 }
 
 
-function falar(texto){
+/* =========================================================
+   RELÓGIO
+========================================================= */
 
-    if("speechSynthesis" in window){
+function NexusRelogio(){
 
-        const fala = new SpeechSynthesisUtterance(texto);
+    const agora =
+        new Date();
 
-        fala.lang = "pt-BR";
-        fala.rate = 1;
-        fala.pitch = 1;
 
-        window.speechSynthesis.cancel();
+    const hora =
+        String(
+            agora.getHours()
+        ).padStart(2,"0");
 
-        window.speechSynthesis.speak(fala);
+
+    const minuto =
+        String(
+            agora.getMinutes()
+        ).padStart(2,"0");
+
+
+    const segundo =
+        String(
+            agora.getSeconds()
+        ).padStart(2,"0");
+
+
+    document.getElementById(
+        "relogio"
+    ).textContent =
+        hora + ":" +
+        minuto + ":" +
+        segundo;
+
+
+    const opcoes = {
+        weekday:"long",
+        day:"2-digit",
+        month:"long",
+        year:"numeric"
+    };
+
+
+    document.getElementById(
+        "dataAtual"
+    ).textContent =
+        agora.toLocaleDateString(
+            "pt-BR",
+            opcoes
+        );
+
+}
+
+
+setInterval(
+    NexusRelogio,
+    1000
+);
+
+NexusRelogio();
+
+
+/* =========================================================
+   VOZ — RESPOSTA
+========================================================= */
+
+function NexusFalar(texto){
+
+    if(
+        !("speechSynthesis" in window)
+    ){
+
+        return;
+
     }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const fala =
+        new SpeechSynthesisUtterance(
+            texto
+        );
+
+
+    fala.lang = "pt-BR";
+    fala.rate = 1;
+    fala.pitch = 1;
+
+
+    window.speechSynthesis.speak(
+        fala
+    );
+
 }
 
 
-function falarNexus(){
+/* =========================================================
+   VOZ — RECONHECIMENTO
+========================================================= */
+
+function NexusOuvir(){
 
     const Reconhecimento =
         window.SpeechRecognition ||
         window.webkitSpeechRecognition;
 
+
     if(!Reconhecimento){
 
-        alert(
-            "O reconhecimento de voz não está disponível neste navegador."
-        );
+        const texto =
+            "Seu navegador não possui reconhecimento de voz.";
+
+        document.getElementById(
+            "respostaNexus"
+        ).textContent = texto;
+
+        NexusFalar(texto);
 
         return;
+
     }
 
-    const reconhecimento = new Reconhecimento();
 
-    reconhecimento.lang = "pt-BR";
-    reconhecimento.continuous = false;
-    reconhecimento.interimResults = false;
+    const reconhecimento =
+        new Reconhecimento();
 
-    const status =
-        document.getElementById("statusVoz");
 
-    status.textContent =
-        "🎙️ Estou ouvindo...";
+    reconhecimento.lang =
+        "pt-BR";
+
+
+    reconhecimento.continuous =
+        false;
+
+
+    reconhecimento.interimResults =
+        false;
+
+
+    document.getElementById(
+        "statusSistema"
+    ).textContent =
+        "● Estou ouvindo...";
+
 
     reconhecimento.start();
 
-    reconhecimento.onresult = function(event){
 
-        const comando =
-            event.results[0][0].transcript.toLowerCase();
+    reconhecimento.onresult =
+        function(event){
 
-        status.textContent =
-            "Você disse: " + comando;
+            const comando =
+                event
+                .results[0][0]
+                .transcript
+                .toLowerCase()
+                .trim();
 
-        executarComando(comando);
-    };
 
-    reconhecimento.onerror = function(){
+            document.getElementById(
+                "respostaNexus"
+            ).textContent =
+                "Você disse: " +
+                comando;
 
-        status.textContent =
-            "Não consegui entender o comando.";
-    };
 
-    reconhecimento.onend = function(){
+            NexusProcessarComando(
+                comando
+            );
 
-        if(
-            status.textContent ===
-            "🎙️ Estou ouvindo..."
-        ){
+        };
 
-            status.textContent =
-                "Aguardando comando...";
-        }
-    };
+
+    reconhecimento.onerror =
+        function(){
+
+            document.getElementById(
+                "statusSistema"
+            ).textContent =
+                "● Não consegui ouvir";
+
+
+            NexusFalar(
+                "Não consegui ouvir. Tente novamente."
+            );
+
+        };
+
+
+    reconhecimento.onend =
+        function(){
+
+            document.getElementById(
+                "statusSistema"
+            ).textContent =
+                "● Sistema pronto";
+
+        };
+
 }
 
 
-function executarComando(comando){
+/* =========================================================
+   COMANDOS DE VOZ
+========================================================= */
+
+function NexusProcessarComando(
+    comando
+){
 
     if(
         comando.includes("rotina")
     ){
 
-        abrirTela("rotina");
+        NexusAbrirTela(
+            "rotina"
+        );
 
-        falar(
+        NexusFalar(
             "Abrindo sua rotina."
         );
 
         return;
+
     }
 
 
     if(
+        comando.includes("notas") ||
         comando.includes("nota")
     ){
 
-        abrirTela("notas");
+        NexusAbrirTela(
+            "notas"
+        );
 
-        falar(
+        NexusFalar(
             "Abrindo suas notas."
         );
 
         return;
+
     }
 
 
     if(
         comando.includes("finança") ||
-        comando.includes("financa") ||
-        comando.includes("financeiro")
+        comando.includes("finanças")
     ){
 
-        abrirTela("financas");
+        NexusAbrirTela(
+            "financas"
+        );
 
-        falar(
+        NexusFalar(
             "Abrindo suas finanças."
         );
 
         return;
+
     }
 
 
     if(
-        comando.includes("estudo")
+        comando.includes("estudo") ||
+        comando.includes("estudos")
     ){
 
-        abrirTela("estudos");
+        NexusAbrirTela(
+            "estudos"
+        );
 
-        falar(
+        NexusFalar(
             "Abrindo seus estudos."
         );
 
         return;
+
     }
 
 
     if(
-        comando.includes("gps") ||
-        comando.includes("mapa")
+        comando.includes("mapa") ||
+        comando.includes("navegação") ||
+        comando.includes("navegacao")
     ){
 
-        abrirTela("gps");
+        NexusAbrirTela(
+            "navegacao"
+        );
 
-        falar(
-            "Abrindo GPS."
+        NexusFalar(
+            "Abrindo a navegação."
         );
 
         return;
+
     }
 
 
@@ -795,553 +1788,623 @@ function executarComando(comando){
         comando.includes("musica")
     ){
 
-        abrirTela("musica");
+        NexusAbrirTela(
+            "musica"
+        );
 
-        falar(
+        NexusFalar(
             "Abrindo música."
         );
 
         return;
+
+    }
+
+
+    if(
+        comando.includes("calculadora") ||
+        comando.includes("calcular")
+    ){
+
+        NexusAbrirTela(
+            "calculadora"
+        );
+
+        NexusFalar(
+            "Abrindo a calculadora."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        comando.includes("notificação") ||
+        comando.includes("notificações") ||
+        comando.includes("notificacoes")
+    ){
+
+        NexusAbrirTela(
+            "notificacoes"
+        );
+
+        NexusFalar(
+            "Abrindo notificações."
+        );
+
+        return;
+
     }
 
 
     if(
         comando.includes("configuração") ||
+        comando.includes("configurações") ||
         comando.includes("configuracao")
     ){
 
-        abrirTela("config");
+        NexusAbrirTela(
+            "configuracoes"
+        );
 
-        falar(
+        NexusFalar(
             "Abrindo configurações."
         );
 
         return;
+
     }
 
 
-    falar(
-        "Comando recebido, mas essa função ainda está sendo desenvolvida."
+    if(
+        comando.includes("olá") ||
+        comando.includes("ola") ||
+        comando.includes("oi") ||
+        comando.includes("bom dia")
+    ){
+
+        NexusFalar(
+            "Olá. Eu sou o Nexus. Como posso ajudar?"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        comando.includes("voltar") ||
+        comando.includes("início") ||
+        comando.includes("inicio")
+    ){
+
+        NexusAbrirTela(
+            "inicio"
+        );
+
+        NexusFalar(
+            "Voltando para a tela inicial."
+        );
+
+        return;
+
+    }
+
+
+    NexusFalar(
+        "Ainda estou aprendendo esse comando."
     );
+
 }
 
 
-function testarVoz(){
+/* =========================================================
+   NOTAS
+========================================================= */
 
-    falar(
-        "Olá Emerson. Eu sou o Nexus. Seu assistente pessoal."
-    );
-}
-
-
-/* ROTINA */
-
-function adicionarTarefa(){
+function NexusSalvarNota(){
 
     const campo =
-        document.getElementById("tarefaInput");
+        document.getElementById(
+            "campoNota"
+        );
+
 
     const texto =
         campo.value.trim();
 
-    if(!texto){
-
-        alert(
-            "Digite uma tarefa."
-        );
-
-        return;
-    }
-
-    let tarefas =
-        JSON.parse(
-            localStorage.getItem(
-                "nexus_tarefas"
-            ) || "[]"
-        );
-
-    tarefas.push(texto);
-
-    localStorage.setItem(
-        "nexus_tarefas",
-        JSON.stringify(tarefas)
-    );
-
-    campo.value = "";
-
-    mostrarTarefas();
-}
-
-
-function mostrarTarefas(){
-
-    const lista =
-        document.getElementById(
-            "listaTarefas"
-        );
-
-    if(!lista){
-        return;
-    }
-
-    let tarefas =
-        JSON.parse(
-            localStorage.getItem(
-                "nexus_tarefas"
-            ) || "[]"
-        );
-
-    lista.innerHTML = "";
-
-    tarefas.forEach(
-        function(tarefa,index){
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-            item.className =
-                "item";
-
-            item.textContent =
-                "☐ " + tarefa;
-
-            const botao =
-                document.createElement(
-                    "button"
-                );
-
-            botao.className =
-                "btn";
-
-            botao.textContent =
-                "Remover";
-
-            botao.onclick =
-                function(){
-
-                    removerTarefa(index);
-
-                };
-
-            item.appendChild(
-                botao
-            );
-
-            lista.appendChild(
-                item
-            );
-        }
-    );
-}
-
-
-function removerTarefa(index){
-
-    let tarefas =
-        JSON.parse(
-            localStorage.getItem(
-                "nexus_tarefas"
-            ) || "[]"
-        );
-
-    tarefas.splice(
-        index,
-        1
-    );
-
-    localStorage.setItem(
-        "nexus_tarefas",
-        JSON.stringify(tarefas)
-    );
-
-    mostrarTarefas();
-}
-
-
-/* NOTAS */
-
-function salvarNota(){
-
-    const campo =
-        document.getElementById(
-            "notaInput"
-        );
-
-    const texto =
-        campo.value.trim();
 
     if(!texto){
 
-        alert(
-            "Digite uma nota."
-        );
-
-        return;
-    }
-
-    let notas =
-        JSON.parse(
-            localStorage.getItem(
-                "nexus_notas"
-            ) || "[]"
-        );
-
-    notas.push(texto);
-
-    localStorage.setItem(
-        "nexus_notas",
-        JSON.stringify(notas)
-    );
-
-    campo.value = "";
-
-    mostrarNotas();
-}
-
-
-function mostrarNotas(){
-
-    const lista =
         document.getElementById(
-            "listaNotas"
-        );
+            "resultadoNota"
+        ).textContent =
+            "Digite uma nota primeiro.";
 
-    if(!lista){
         return;
+
     }
 
-    let notas =
-        JSON.parse(
-            localStorage.getItem(
-                "nexus_notas"
-            ) || "[]"
-        );
-
-    lista.innerHTML = "";
-
-    notas.forEach(
-        function(nota,index){
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-            item.className =
-                "item";
-
-            item.textContent =
-                nota;
-
-            const botao =
-                document.createElement(
-                    "button"
-                );
-
-            botao.className =
-                "btn";
-
-            botao.textContent =
-                "Remover";
-
-            botao.onclick =
-                function(){
-
-                    removerNota(index);
-
-                };
-
-            item.appendChild(
-                botao
-            );
-
-            lista.appendChild(
-                item
-            );
-        }
-    );
-}
-
-
-function removerNota(index){
-
-    let notas =
-        JSON.parse(
-            localStorage.getItem(
-                "nexus_notas"
-            ) || "[]"
-        );
-
-    notas.splice(
-        index,
-        1
-    );
 
     localStorage.setItem(
-        "nexus_notas",
-        JSON.stringify(notas)
+        "NEXUS_NOTA",
+        texto
     );
 
-    mostrarNotas();
+
+    document.getElementById(
+        "resultadoNota"
+    ).textContent =
+        "✓ Nota salva neste aparelho.";
+
+
+    NexusFalar(
+        "Nota salva."
+    );
+
 }
 
 
-/* FINANÇAS */
+function NexusCarregarNota(){
 
-function obterSaldo(){
-
-    return Number(
+    const nota =
         localStorage.getItem(
-            "nexus_saldo"
-        ) || 0
-    );
+            "NEXUS_NOTA"
+        );
+
+
+    if(nota){
+
+        document.getElementById(
+            "campoNota"
+        ).value =
+            nota;
+
+    }
+
 }
 
 
-function atualizarSaldo(){
+function NexusApagarNota(){
 
-    const elemento =
-        document.getElementById(
-            "saldo"
-        );
+    localStorage.removeItem(
+        "NEXUS_NOTA"
+    );
 
-    if(!elemento){
-        return;
-    }
+
+    document.getElementById(
+        "campoNota"
+    ).value = "";
+
+
+    document.getElementById(
+        "resultadoNota"
+    ).textContent =
+        "Nota apagada.";
+
+}
+
+
+/* =========================================================
+   FINANÇAS
+========================================================= */
+
+let nexusEntradas =
+    Number(
+        localStorage.getItem(
+            "NEXUS_ENTRADAS"
+        )
+    ) || 0;
+
+
+let nexusGastos =
+    Number(
+        localStorage.getItem(
+            "NEXUS_GASTOS"
+        )
+    ) || 0;
+
+
+function NexusAtualizarFinancas(){
 
     const saldo =
-        obterSaldo();
+        nexusEntradas -
+        nexusGastos;
 
-    elemento.textContent =
-        saldo.toLocaleString(
-            "pt-BR",
-            {
-                style:"currency",
-                currency:"BRL"
-            }
-        );
+
+    document.getElementById(
+        "saldo"
+    ).textContent =
+        "R$ " +
+        saldo.toFixed(2)
+        .replace(".",",");
+
+
+    document.getElementById(
+        "resumoFinanceiro"
+    ).innerHTML =
+
+        "Entradas: <strong>R$ " +
+        nexusEntradas
+        .toFixed(2)
+        .replace(".",",") +
+        "</strong><br><br>" +
+
+        "Gastos: <strong>R$ " +
+        nexusGastos
+        .toFixed(2)
+        .replace(".",",") +
+        "</strong><br><br>" +
+
+        "Saldo: <strong>R$ " +
+        saldo
+        .toFixed(2)
+        .replace(".",",") +
+        "</strong>";
+
 }
 
 
-function registrarEntrada(){
+function NexusAdicionarEntrada(){
 
     const campo =
         document.getElementById(
-            "valorEntrada"
+            "valorFinanceiro"
         );
+
 
     const valor =
-        Number(campo.value);
-
-    if(!valor || valor <= 0){
-
-        alert(
-            "Digite um valor válido."
-        );
-
-        return;
-    }
-
-    const novoSaldo =
-        obterSaldo() + valor;
-
-    localStorage.setItem(
-        "nexus_saldo",
-        novoSaldo
-    );
-
-    campo.value = "";
-
-    atualizarSaldo();
-}
-
-
-function registrarSaida(){
-
-    const campo =
-        document.getElementById(
-            "valorSaida"
-        );
-
-    const valor =
-        Number(campo.value);
-
-    if(!valor || valor <= 0){
-
-        alert(
-            "Digite um valor válido."
-        );
-
-        return;
-    }
-
-    const novoSaldo =
-        obterSaldo() - valor;
-
-    localStorage.setItem(
-        "nexus_saldo",
-        novoSaldo
-    );
-
-    campo.value = "";
-
-    atualizarSaldo();
-}
-
-
-/* RESERVA */
-
-function adicionarReserva(){
-
-    const campo =
-        document.getElementById(
-            "valorReserva"
-        );
-
-    const valor =
-        Number(campo.value);
-
-    if(!valor || valor <= 0){
-
-        alert(
-            "Digite um valor válido."
-        );
-
-        return;
-    }
-
-    let reserva =
         Number(
-            localStorage.getItem(
-                "nexus_reserva"
-            ) || 0
+            campo.value
         );
 
-    reserva += valor;
+
+    if(
+        !valor ||
+        valor <= 0
+    ){
+
+        alert(
+            "Digite um valor válido."
+        );
+
+        return;
+
+    }
+
+
+    nexusEntradas +=
+        valor;
+
 
     localStorage.setItem(
-        "nexus_reserva",
-        reserva
+        "NEXUS_ENTRADAS",
+        nexusEntradas
     );
+
 
     campo.value = "";
 
-    atualizarReserva();
+
+    NexusAtualizarFinancas();
+
 }
 
 
-function atualizarReserva(){
+function NexusAdicionarGasto(){
 
-    const elemento =
+    const campo =
         document.getElementById(
-            "totalReserva"
+            "valorFinanceiro"
         );
 
-    if(!elemento){
+
+    const valor =
+        Number(
+            campo.value
+        );
+
+
+    if(
+        !valor ||
+        valor <= 0
+    ){
+
+        alert(
+            "Digite um valor válido."
+        );
+
         return;
+
     }
 
-    const reserva =
-        Number(
-            localStorage.getItem(
-                "nexus_reserva"
-            ) || 0
-        );
 
-    elemento.textContent =
-        reserva.toLocaleString(
-            "pt-BR",
-            {
-                style:"currency",
-                currency:"BRL"
-            }
-        );
-}
+    nexusGastos +=
+        valor;
 
 
-/* ESTUDOS */
-
-function mostrarMensagem(nome){
-
-    const elemento =
-        document.getElementById(
-            "mensagemEstudo"
-        );
-
-    elemento.textContent =
-        "Módulo selecionado: " + nome;
-}
-
-
-/* LINKS */
-
-function abrirLink(link){
-
-    window.open(
-        link,
-        "_blank"
+    localStorage.setItem(
+        "NEXUS_GASTOS",
+        nexusGastos
     );
+
+
+    campo.value = "";
+
+
+    NexusAtualizarFinancas();
+
 }
 
 
-/* LIMPAR DADOS */
-
-function limparDados(){
+function NexusLimparFinancas(){
 
     const confirmar =
         confirm(
-            "Deseja apagar os dados salvos do Nexus?"
+            "Apagar todos os registros financeiros?"
         );
 
+
     if(!confirmar){
+
         return;
+
     }
 
-    localStorage.removeItem(
-        "nexus_tarefas"
-    );
+
+    nexusEntradas = 0;
+    nexusGastos = 0;
+
 
     localStorage.removeItem(
-        "nexus_notas"
+        "NEXUS_ENTRADAS"
     );
+
 
     localStorage.removeItem(
-        "nexus_saldo"
+        "NEXUS_GASTOS"
     );
 
-    localStorage.removeItem(
-        "nexus_reserva"
-    );
 
-    mostrarTarefas();
+    NexusAtualizarFinancas();
 
-    mostrarNotas();
-
-    atualizarSaldo();
-
-    atualizarReserva();
-
-    alert(
-        "Dados apagados."
-    );
 }
 
 
-/* INICIALIZAÇÃO */
+/* =========================================================
+   CALCULADORA
+========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
+function NexusCalcular(){
+
+    const campo =
+        document.getElementById(
+            "campoCalculo"
+        );
+
+
+    const resultado =
+        document.getElementById(
+            "resultadoCalculo"
+        );
+
+
+    const conta =
+        campo.value.trim();
+
+
+    if(!conta){
+
+        resultado.textContent =
+            "Digite uma conta.";
+
+        return;
+
+    }
+
+
+    /*
+       Permitimos apenas:
+       números
+       + - * /
+       parênteses
+       ponto
+       espaços
+    */
+
+    if(
+        !/^[0-9+\-*/().\s]+$/
+        .test(conta)
+    ){
+
+        resultado.textContent =
+            "Conta inválida.";
+
+        return;
+
+    }
+
+
+    try{
+
+        const valor =
+            Function(
+                '"use strict"; return (' +
+                conta +
+                ')'
+            )();
+
+
+        if(
+            typeof valor !==
+            "number" ||
+            !isFinite(valor)
+        ){
+
+            throw new Error();
+
+        }
+
+
+        resultado.innerHTML =
+            "Resultado: <strong>" +
+            valor +
+            "</strong>";
+
+
+    }catch(erro){
+
+        resultado.textContent =
+            "Não foi possível calcular.";
+
+    }
+
+}
+
+
+/* =========================================================
+   MAPA
+========================================================= */
+
+function NexusAbrirMapa(){
+
+    const destino =
+        document.getElementById(
+            "destino"
+        ).value.trim();
+
+
+    if(!destino){
+
+        alert(
+            "Digite um destino."
+        );
+
+        return;
+
+    }
+
+
+    const url =
+        "https://www.google.com/maps/search/?api=1&query=" +
+        encodeURIComponent(
+            destino
+        );
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =========================================================
+   MÚSICA
+========================================================= */
+
+function NexusAbrirMusica(){
+
+    window.open(
+        "https://music.youtube.com/",
+        "_blank"
+    );
+
+}
+
+
+/* =========================================================
+   APAGAR DADOS
+========================================================= */
+
+function NexusApagarDados(){
+
+    const confirmar =
+        confirm(
+            "Isso apagará as notas e registros financeiros salvos neste aparelho. Continuar?"
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+    localStorage.removeItem(
+        "NEXUS_NOTA"
+    );
+
+
+    localStorage.removeItem(
+        "NEXUS_ENTRADAS"
+    );
+
+
+    localStorage.removeItem(
+        "NEXUS_GASTOS"
+    );
+
+
+    document.getElementById(
+        "campoNota"
+    ).value = "";
+
+
+    nexusEntradas = 0;
+    nexusGastos = 0;
+
+
+    NexusAtualizarFinancas();
+
+
+    alert(
+        "Dados locais apagados."
+    );
+
+}
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
+window.addEventListener(
+    "load",
     function(){
 
-        mostrarTarefas();
+        NexusCarregarNota();
 
-        mostrarNotas();
+        NexusAtualizarFinancas();
 
-        atualizarSaldo();
+        NexusAbrirTela(
+            "inicio"
+        );
 
-        atualizarReserva();
+    }
+);
+
+
+/* =========================================================
+   TECLA ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape"
+        ){
+
+            NexusAbrirTela(
+                "inicio"
+            );
+
+        }
 
     }
 );
