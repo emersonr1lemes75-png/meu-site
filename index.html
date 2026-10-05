@@ -45,13 +45,6 @@ body{
 
 button{
   font:inherit;
-}
-
-button,
-.card,
-.feature,
-.quick,
-.nav{
   -webkit-tap-highlight-color:transparent;
 }
 
@@ -166,7 +159,7 @@ button,
   text-transform:capitalize;
 }
 
-/* MICROFONE */
+/* VOZ */
 
 .voice{
   margin-top:22px;
@@ -174,8 +167,7 @@ button,
   min-height:82px;
   border:1px solid rgba(24,217,255,.35);
   border-radius:20px;
-  background:
-    linear-gradient(135deg,#073257,#071426);
+  background:linear-gradient(135deg,#073257,#071426);
   color:#fff;
   display:flex;
   align-items:center;
@@ -213,7 +205,7 @@ button,
   margin-top:4px;
 }
 
-/* GRADE */
+/* CARDS */
 
 .grid{
   display:grid;
@@ -228,6 +220,8 @@ button,
   border-radius:18px;
   padding:17px;
   min-height:130px;
+  cursor:pointer;
+  transition:.2s;
 }
 
 .card:active{
@@ -323,7 +317,7 @@ button,
   color:var(--muted);
 }
 
-/* CABEÇALHO DAS PÁGINAS */
+/* PÁGINAS */
 
 .page-head{
   padding:10px 2px 18px;
@@ -454,7 +448,6 @@ button,
   min-height:15px;
   border-radius:7px 7px 0 0;
   background:linear-gradient(to top,var(--blue),var(--cyan));
-  box-shadow:0 0 12px rgba(24,217,255,.2);
 }
 
 .bar:nth-child(1){height:45%}
@@ -510,8 +503,12 @@ button,
   width:82px;
   height:82px;
   border-radius:50%;
-  background:
-    radial-gradient(circle at 35% 30%,#1be0ff,#07519c 45%,#041427 70%);
+  background:radial-gradient(
+    circle at 35% 30%,
+    #1be0ff,
+    #07519c 45%,
+    #041427 70%
+  );
   border:2px solid var(--cyan);
   display:flex;
   align-items:center;
@@ -577,7 +574,7 @@ button,
   left:22px;
 }
 
-/* BOTÃO */
+/* BOTÕES */
 
 .btn{
   width:100%;
@@ -641,8 +638,7 @@ button,
   height:58px;
   border-radius:50%;
   border:2px solid var(--cyan);
-  background:
-    radial-gradient(circle,#0873a2,#04172a 70%);
+  background:radial-gradient(circle,#0873a2,#04172a 70%);
   color:#fff;
   margin:-28px auto 0;
   display:flex;
@@ -674,7 +670,7 @@ button,
   font-size:13px;
 }
 
-/* JANELA DE FUNÇÃO */
+/* JANELA */
 
 .modal{
   display:none;
@@ -745,6 +741,7 @@ textarea.input{
 /* RESPONSIVO */
 
 @media(min-width:700px){
+
   .grid{
     grid-template-columns:repeat(4,1fr);
   }
@@ -756,9 +753,11 @@ textarea.input{
   .statgrid{
     grid-template-columns:repeat(4,1fr);
   }
+
 }
 
 @media(max-width:430px){
+
   .clock{
     font-size:42px;
   }
@@ -774,6 +773,7 @@ textarea.input{
   .hero{
     padding:20px;
   }
+
 }
 </style>
 </head>
@@ -782,409 +782,615 @@ textarea.input{
 
 <div class="app">
 
-  <!-- CABEÇALHO -->
-  <header class="header">
-    <div class="logo">NE<span>X</span><b>US</b></div>
+<header class="header">
 
-    <div class="status">
-      <span class="status-dot"></span>
-      ONLINE
+  <div class="logo">
+    NE<span>X</span><b>US</b>
+  </div>
+
+  <div class="status">
+    <span class="status-dot"></span>
+    ONLINE
+  </div>
+
+</header>
+
+
+<!-- INÍCIO -->
+
+<main id="inicio" class="screen active">
+
+<section class="hero">
+
+  <div class="greeting">
+    Seu assistente pessoal
+  </div>
+
+  <h1>
+    Olá, <span>Emerson</span>.
+  </h1>
+
+  <div id="clock" class="clock">
+    00:00
+  </div>
+
+  <div id="date" class="date">
+    carregando data...
+  </div>
+
+  <button class="voice" onclick="falar()">
+
+    <div class="voice-icon">
+      🎙️
     </div>
-  </header>
+
+    <div>
+      <strong>Falar com NEXUS</strong>
+      <small>Diga um comando de voz</small>
+    </div>
+
+  </button>
+
+</section>
 
 
-  <!-- ================= INÍCIO ================= -->
+<section class="grid">
 
-  <main id="inicio" class="screen active">
+  <div class="card" onclick="abrirFuncao('rotina')">
 
-    <section class="hero">
+    <div class="card-icon">⏰</div>
 
-      <div class="greeting">Seu assistente pessoal</div>
+    <div class="card-title">
+      Próxima tarefa
+    </div>
 
-      <h1>Olá, <span>Emerson</span>.</h1>
+    <div class="card-value">
+      Sua rotina
+    </div>
 
-      <div id="clock" class="clock">00:00</div>
+    <small>
+      Organize seu dia
+    </small>
 
-      <div id="date" class="date">
-        carregando data...
+  </div>
+
+
+  <div class="card" onclick="abrirFuncao('notificacoes')">
+
+    <div class="card-icon">🔔</div>
+
+    <div class="card-title">
+      Notificações
+    </div>
+
+    <div class="card-value cyan">
+      0
+    </div>
+
+    <small>
+      Nenhuma pendência
+    </small>
+
+  </div>
+
+
+  <div class="card" onclick="abrirFuncao('financas')">
+
+    <div class="card-icon">💰</div>
+
+    <div class="card-title">
+      Finanças
+    </div>
+
+    <div class="card-value green">
+      R$ 0,00
+    </div>
+
+    <small>
+      Controle financeiro
+    </small>
+
+  </div>
+
+
+  <div class="card" onclick="abrirFuncao('notas')">
+
+    <div class="card-icon">📝</div>
+
+    <div class="card-title">
+      Notas
+    </div>
+
+    <div class="card-value">
+      0
+    </div>
+
+    <small>
+      Notas salvas
+    </small>
+
+  </div>
+
+</section>
+
+
+<section class="section">
+
+  <div class="section-title">
+
+    <h2>
+      Acesso rápido
+    </h2>
+
+    <span>
+      NEXUS 1.0
+    </span>
+
+  </div>
+
+
+  <div class="quick-grid">
+
+    <button class="quick" onclick="abrirFuncao('rotina')">
+      <div class="quick-icon">⏰</div>
+      <span>Rotina</span>
+    </button>
+
+    <button class="quick" onclick="abrirFuncao('alarme')">
+      <div class="quick-icon">🔔</div>
+      <span>Alarmes</span>
+    </button>
+
+    <button class="quick" onclick="abrirFuncao('musica')">
+      <div class="quick-icon">🎵</div>
+      <span>Música</span>
+    </button>
+
+    <button class="quick" onclick="abrirFuncao('mapa')">
+      <div class="quick-icon">🧭</div>
+      <span>Navegação</span>
+    </button>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- FUNÇÕES -->
+
+<main id="funcoes" class="screen">
+
+<div class="page-head">
+
+  <h1>Funções</h1>
+
+  <p>
+    Tudo que o NEXUS pode organizar para você.
+  </p>
+
+</div>
+
+
+<div class="function-grid">
+
+  <div class="feature" onclick="abrirFuncao('rotina')">
+    <div class="big">⏰</div>
+    <h3>Minha rotina</h3>
+    <p>
+      Organize tarefas, horários e compromissos.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('alarme')">
+    <div class="big">🔔</div>
+    <h3>Alarmes</h3>
+    <p>
+      Controle seus horários e lembretes.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('notificacoes')">
+    <div class="big">📱</div>
+    <h3>Notificações</h3>
+    <p>
+      Central de avisos do seu assistente.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('financas')">
+    <div class="big">💰</div>
+    <h3>Finanças</h3>
+    <p>
+      Controle seus gastos, economia e objetivos.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('notas')">
+    <div class="big">📝</div>
+    <h3>Notas</h3>
+    <p>
+      Guarde ideias, informações e lembretes.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('estudos')">
+    <div class="big">📚</div>
+    <h3>Estudos</h3>
+    <p>
+      Organize seu aprendizado e seus objetivos.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('musica')">
+    <div class="big">🎵</div>
+    <h3>Música</h3>
+    <p>
+      Acesse suas músicas e playlists.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('mapa')">
+    <div class="big">🧭</div>
+    <h3>Navegação</h3>
+    <p>
+      Prepare destinos e rotas.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('cofre')">
+    <div class="big">🔐</div>
+    <h3>Cofre pessoal</h3>
+    <p>
+      Área para objetivos e informações privadas.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('calculadora')">
+    <div class="big">🧮</div>
+    <h3>Calculadora</h3>
+    <p>
+      Faça cálculos rapidamente.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('chat')">
+    <div class="big">🤖</div>
+    <h3>Inteligência</h3>
+    <p>
+      Área preparada para integração com IA.
+    </p>
+  </div>
+
+
+  <div class="feature" onclick="abrirFuncao('configuracoes')">
+    <div class="big">⚙️</div>
+    <h3>Configurações</h3>
+    <p>
+      Personalize seu NEXUS.
+    </p>
+  </div>
+
+</div>
+
+</main>
+
+
+<!-- RELATÓRIOS -->
+
+<main id="relatorios" class="screen">
+
+<div class="page-head">
+
+  <h1>Relatórios</h1>
+
+  <p>
+    Acompanhe sua utilização do NEXUS.
+  </p>
+
+</div>
+
+
+<div class="tabs">
+
+  <button class="tab active" onclick="trocarAba(this)">
+    Hoje
+  </button>
+
+  <button class="tab" onclick="trocarAba(this)">
+    Semana
+  </button>
+
+  <button class="tab" onclick="trocarAba(this)">
+    Mês
+  </button>
+
+</div>
+
+
+<div class="statgrid">
+
+  <div class="stat">
+    <h3>Comandos</h3>
+    <strong class="cyan">0</strong>
+  </div>
+
+  <div class="stat">
+    <h3>Tarefas</h3>
+    <strong>0</strong>
+  </div>
+
+  <div class="stat">
+    <h3>Notas</h3>
+    <strong>0</strong>
+  </div>
+
+  <div class="stat">
+    <h3>Economia</h3>
+    <strong class="green">R$ 0</strong>
+  </div>
+
+</div>
+
+
+<div class="chart">
+
+  <h3>
+    Atividade
+  </h3>
+
+  <div class="bars">
+
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+
+  </div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">
+
+  <h2>
+    Atividades recentes
+  </h2>
+
+</div>
+
+
+<div class="chart">
+
+  <div class="activity">
+
+    <div class="activity-left">
+
+      <div class="activity-icon">
+        🎙️
       </div>
 
-      <button class="voice" onclick="falar()">
+      <div>
+        <strong>Comando de voz</strong><br>
+        <small>
+          Nenhum comando registrado
+        </small>
+      </div>
 
-        <div class="voice-icon">🎙️</div>
+    </div>
 
-        <div>
-          <strong>Falar com NEXUS</strong>
-          <small>Diga um comando de voz</small>
-        </div>
+    <small>--</small>
 
+  </div>
+
+
+  <div class="activity">
+
+    <div class="activity-left">
+
+      <div class="activity-icon">
+        📝
+      </div>
+
+      <div>
+        <strong>Notas</strong><br>
+        <small>
+          Nenhuma nota registrada
+        </small>
+      </div>
+
+    </div>
+
+    <small>--</small>
+
+  </div>
+
+
+  <div class="activity">
+
+    <div class="activity-left">
+
+      <div class="activity-icon">
+        💰
+      </div>
+
+      <div>
+        <strong>Finanças</strong><br>
+        <small>
+          Nenhuma movimentação registrada
+        </small>
+      </div>
+
+    </div>
+
+    <small>--</small>
+
+  </div>
+
+</div>
+
+</div>
+
+</main>
+
+
+<!-- PERFIL -->
+
+<main id="perfil" class="screen">
+
+<div class="page-head">
+
+  <h1>Perfil</h1>
+
+  <p>
+    Personalize sua experiência com o NEXUS.
+  </p>
+
+</div>
+
+
+<section class="profile">
+
+  <div class="avatar">
+    N
+  </div>
+
+  <h2>
+    Emerson
+  </h2>
+
+  <p>
+    Usuário principal do NEXUS 1.0
+  </p>
+
+
+  <div class="setting">
+
+    <div class="setting-row">
+
+      <span>
+        Comando de voz
+      </span>
+
+      <div
+        class="toggle on"
+        onclick="alternar(this)"
+      ></div>
+
+    </div>
+
+
+    <div class="setting-row">
+
+      <span>
+        Resposta automática
+      </span>
+
+      <div
+        class="toggle on"
+        onclick="alternar(this)"
+      ></div>
+
+    </div>
+
+
+    <div class="setting-row">
+
+      <span>
+        Modo inteligente
+      </span>
+
+      <div
+        class="toggle on"
+        onclick="alternar(this)"
+      ></div>
+
+    </div>
+
+
+    <div class="setting-row">
+
+      <span>
+        Privacidade
+      </span>
+
+      <button
+        class="btn"
+        style="width:auto;margin:0;padding:7px 12px"
+        onclick="abrirFuncao('privacidade')"
+      >
+        Abrir
       </button>
 
-    </section>
-
-
-    <section class="grid">
-
-      <div class="card" onclick="abrirFuncao('rotina')">
-        <div class="card-icon">⏰</div>
-        <div class="card-title">Próxima tarefa</div>
-        <div class="card-value">Sua rotina</div>
-        <small>Organize seu dia</small>
-      </div>
-
-      <div class="card" onclick="abrirFuncao('notificacoes')">
-        <div class="card-icon">🔔</div>
-        <div class="card-title">Notificações</div>
-        <div class="card-value cyan">0</div>
-        <small>Nenhuma pendência</small>
-      </div>
-
-      <div class="card" onclick="abrirFuncao('financas')">
-        <div class="card-icon">💰</div>
-        <div class="card-title">Finanças</div>
-        <div class="card-value green">R$ 0,00</div>
-        <small>Controle financeiro</small>
-      </div>
-
-      <div class="card" onclick="abrirFuncao('notas')">
-        <div class="card-icon">📝</div>
-        <div class="card-title">Notas</div>
-        <div class="card-value">0</div>
-        <small>Notas salvas</small>
-      </div>
-
-    </section>
-
-
-    <section class="section">
-
-      <div class="section-title">
-        <h2>Acesso rápido</h2>
-        <span>NEXUS 1.0</span>
-      </div>
-
-      <div class="quick-grid">
-
-        <button class="quick" onclick="abrirFuncao('rotina')">
-          <div class="quick-icon">⏰</div>
-          <span>Rotina</span>
-        </button>
-
-        <button class="quick" onclick="abrirFuncao('alarme')">
-          <div class="quick-icon">🔔</div>
-          <span>Alarmes</span>
-        </button>
-
-        <button class="quick" onclick="abrirFuncao('musica')">
-          <div class="quick-icon">🎵</div>
-          <span>Música</span>
-        </button>
-
-        <button class="quick" onclick="abrirFuncao('mapa')">
-          <div class="quick-icon">🧭</div>
-          <span>Navegação</span>
-        </button>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- ================= FUNÇÕES ================= -->
-
-  <main id="funcoes" class="screen">
-
-    <div class="page-head">
-      <h1>Funções</h1>
-      <p>Tudo que o NEXUS pode organizar para você.</p>
     </div>
 
-    <div class="function-grid">
-
-      <div class="feature" onclick="abrirFuncao('rotina')">
-        <div class="big">⏰</div>
-        <h3>Minha rotina</h3>
-        <p>Organize tarefas, horários e compromissos.</p>
-      </div>
-
-      <div class="feature" onclick="abrirFuncao('alarme')">
-        <div class="big">🔔</div>
-        <h3>Alarmes</h3>
-        <p>Controle seus horários e lembretes.</p>
-      </div>
-
-      <div class="feature" onclick="abrirFuncao('notificacoes')">
-        <div class="big">📱</div>
-        <h3>Notificações</h3>
-        <p>Central de avisos do seu assistente.</p>
-      </div>
-
-      <div class="feature" onclick="abrirFuncao('financas')">
-        <div class="big">💰</div>
-        <h3>Finanças</h3>
-        <p>Controle seus gastos, economia e objetivos.</p>
-      </div>
-
-      <div class="feature" onclick="abrirFuncao('notas')">
-        <div class="big">📝</div>
-        <h3>Notas</h3>
-        <p>Guarde ideias, informações e lembretes.</p>
-      </div>
-
-      <div class="feature" onclick="abrirFuncao('estudos')">
-        <div class="big">📚</div>
-        <h3>Estudos</h3>
-        <p>Organize seu aprendizado e seus objetivos.</p>
-      </div>
+  </div>
 
-      <div class="feature" onclick="abrirFuncao('musica')">
-        <div class="big">🎵</div>
-        <h3>Música</h3>
-        <p>Acesse suas músicas e playlists.</p>
-      </div>
-
-      <div class="feature" onclick="abrirFuncao('mapa')">
-        <div class="big">🧭</div>
-        <h3>Navegação</h3>
-        <p>Prepare destinos e rotas.</p>
-      </div>
 
-      <div class="feature" onclick="abrirFuncao('cofre')">
-        <div class="big">🔐</div>
-        <h3>Cofre pessoal</h3>
-        <p>Área para objetivos e informações privadas.</p>
-      </div>
+  <button
+    class="btn"
+    onclick="abrirFuncao('configuracoes')"
+  >
+    ⚙️ Configurações do NEXUS
+  </button>
 
-      <div class="feature" onclick="abrirFuncao('calculadora')">
-        <div class="big">🧮</div>
-        <h3>Calculadora</h3>
-        <p>Faça cálculos rapidamente.</p>
-      </div>
 
-      <div class="feature" onclick="abrirFuncao('chat')">
-        <div class="big">🤖</div>
-        <h3>Inteligência</h3>
-        <p>Área preparada para integração com IA.</p>
-      </div>
+  <button
+    class="btn"
+    onclick="avisar('NEXUS 1.0 funcionando normalmente.')"
+  >
+    ℹ️ Ver informações do sistema
+  </button>
 
-      <div class="feature" onclick="abrirFuncao('configuracoes')">
-        <div class="big">⚙️</div>
-        <h3>Configurações</h3>
-        <p>Personalize seu NEXUS.</p>
-      </div>
+</section>
 
-    </div>
+</main>
 
-  </main>
+</div>
 
 
-  <!-- ================= RELATÓRIOS ================= -->
+<!-- MENU INFERIOR -->
 
-  <main id="relatorios" class="screen">
+<div class="bottom">
 
-    <div class="page-head">
-      <h1>Relatórios</h1>
-      <p>Acompanhe sua utilização do NEXUS.</p>
-    </div>
+<div class="navbar">
 
-    <div class="tabs">
+  <button
+    class="nav active"
+    data-screen="inicio"
+    onclick="go('inicio')"
+  >
+    <span class="nav-icon">⌂</span>
+    Início
+  </button>
 
-      <button class="tab active" onclick="trocarAba(this)">
-        Hoje
-      </button>
 
-      <button class="tab" onclick="trocarAba(this)">
-        Semana
-      </button>
+  <button
+    class="nav"
+    data-screen="funcoes"
+    onclick="go('funcoes')"
+  >
+    <span class="nav-icon">▦</span>
+    Funções
+  </button>
 
-      <button class="tab" onclick="trocarAba(this)">
-        Mês
-      </button>
 
-    </div>
-
-
-    <div class="statgrid">
-
-      <div class="stat">
-        <h3>Comandos</h3>
-        <strong class="cyan">0</strong>
-      </div>
-
-      <div class="stat">
-        <h3>Tarefas</h3>
-        <strong>0</strong>
-      </div>
-
-      <div class="stat">
-        <h3>Notas</h3>
-        <strong>0</strong>
-      </div>
-
-      <div class="stat">
-        <h3>Economia</h3>
-        <strong class="green">R$ 0</strong>
-      </div>
-
-    </div>
-
-
-    <div class="chart">
-
-      <h3>Atividade</h3>
-
-      <div class="bars">
-
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-
-      </div>
-
-    </div>
-
-
-    <div class="section">
-
-      <div class="section-title">
-        <h2>Atividades recentes</h2>
-      </div>
-
-      <div class="chart">
-
-        <div class="activity">
-
-          <div class="activity-left">
-
-            <div class="activity-icon">🎙️</div>
-
-            <div>
-              <strong>Comando de voz</strong><br>
-              <small>Nenhum comando registrado</small>
-            </div>
-
-          </div>
-
-          <small>--</small>
-
-        </div>
-
-
-        <div class="activity">
-
-          <div class="activity-left">
-
-            <div class="activity-icon">📝</div>
-
-            <div>
-              <strong>Notas</strong><br>
-              <small>Nenhuma nota registrada</small>
-            </div>
-
-          </div>
-
-          <small>--</small>
-
-        </div>
-
-
-        <div class="activity">
-
-          <div class="activity-left">
-
-            <div class="activity-icon">💰</div>
-
-            <div>
-              <strong>Finanças</strong><br>
-              <small>Nenhuma movimentação registrada</small>
-            </div>
-
-          </div>
-
-          <small>--</small>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- ================= PERFIL ================= -->
-
-  <main id="perfil" class="screen">
-
-    <div class="page-head">
-      <h1>Perfil</h1>
-      <p>Personalize sua experiência com o NEXUS.</p>
-    </div>
-
-
-    <section class="profile">
-
-      <div class="avatar">
-        N
-      </div>
-
-      <h2>Emerson</h2>
-
-      <p>Usuário principal do NEXUS 1.0</p>
-
-
-      <div class="setting">
-
-        <div class="setting-row">
-
-          <span>Comando de voz</span>
-
-          <div
-            class="toggle on"
-            onclick="alternar(this)"
-          ></div>
-
-        </div>
-
-
-        <div class="setting-row">
-
-          <span>Resposta automática</span>
-
-          <div
-            class="toggle on"
-            onclick="alternar(this)"
-          ></div>
-
-        </div>
-
-
-        <div class="setting-row">
-
-          <span>Modo inteligente</span>
-
-          <div
-            class="toggle on"
-            onclick="alternar(this)"
-          ></div>
-
-        </div>
-
-
-        <div class="setting-row">
-
-          <span>Privacidade</span>
-
-          <button
-            class="btn"
-            style="width:auto;margin:0;padding:7px 12px"
-            onclick="abrirFuncao('privacidade')"
-          >
-            Abrir
-          
+  <button
+    class="nav"
+    oncl
